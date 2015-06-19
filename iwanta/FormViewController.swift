@@ -221,8 +221,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func dismissPickerView(sender: UIButton!) {
-        pickerBackgroundView.removeFromSuperview()
         let defaults = NSUserDefaults.standardUserDefaults()
+        var defaultValue = defaults.objectForKey("buttonPressed") as! String
+        
+        if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "CATEGORY")) {
+            genres = drinkGenres
+            categoryButton.setTitle("drinks", forState: UIControlState.Normal)
+        } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "TYPE")) {
+            genreButton.setTitle("something good", forState: UIControlState.Normal)
+        } else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "NEIGHBORHOOD")) {
+            neighborhoodButton.setTitle("Doesn't Matter", forState: UIControlState.Normal)
+        }
+        pickerBackgroundView.removeFromSuperview()
         defaults.setObject("", forKey: "buttonPressed")
     }
     
@@ -230,6 +240,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         let defaults = NSUserDefaults.standardUserDefaults()
         var buttonPressed = defaults.objectForKey("buttonPressed") as! String

@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		86C8320F1B334FBD00A5A85B /* iwanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iwanta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C8320F1B334FBD00A5A85B /* i want a.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i want a.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C832131B334FBD00A5A85B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C832141B334FBD00A5A85B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C832191B334FBD00A5A85B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		86C832101B334FBD00A5A85B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86C8320F1B334FBD00A5A85B /* iwanta.app */,
+				86C8320F1B334FBD00A5A85B /* i want a.app */,
 				86C832241B334FBD00A5A85B /* iwantaTests.xctest */,
 			);
 			name = Products;
@@ -135,7 +135,7 @@
 			);
 			name = iwanta;
 			productName = iwanta;
-			productReference = 86C8320F1B334FBD00A5A85B /* iwanta.app */;
+			productReference = 86C8320F1B334FBD00A5A85B /* i want a.app */;
 			productType = "com.apple.product-type.application";
 		};
 		86C832231B334FBD00A5A85B /* iwantaTests */ = {
@@ -352,7 +352,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iwanta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "i want a";
 			};
 			name = Debug;
 		};
@@ -363,7 +363,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iwanta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "i want a";
 			};
 			name = Release;
 		};
