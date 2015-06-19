@@ -36,7 +36,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     var inLabel:UILabel!
     var neighborhoodButton:UIButton!
     
-    
+    var yelpButton:UIButton!
     var helpButton:UIButton!
     
     var resultBackgroundView:UIView!
@@ -80,7 +80,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject("genre", forKey: "buttonPressed")
         if (categoryButton.titleLabel!.text == "CATEGORY") {
-            let cateogoryAlert = UIAlertView(title:"Hold up!", message: "Please select a category.", delegate:nil,
+            let cateogoryAlert = UIAlertView(title:"Hold up!", message: "Please select a category first.", delegate:nil,
                 cancelButtonTitle:"OK")
             cateogoryAlert.show()
         } else {
@@ -493,7 +493,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         goToLabel.backgroundColor = UIColor.clearColor()
         goToLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
         goToLabel.textAlignment = NSTextAlignment.Center
-        goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 150, 200, 40))
+        goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 120, 200, 40))
         goToLabel.textColor = UIColor.whiteColor()
         resultBackgroundView.addSubview(goToLabel)
         
@@ -502,10 +502,20 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultLabel.backgroundColor = UIColor.clearColor()
         resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 30)
         resultLabel.textAlignment = NSTextAlignment.Center
-        resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 200))
+        resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 150))
         resultLabel.textColor = UIColor(red: 10.0/255.0, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0)
         resultLabel.numberOfLines = 0
         resultBackgroundView.addSubview(resultLabel)
+        
+        if result.id > 0 {
+            yelpButton = UIButton()
+            yelpButton.frame = CGRectMake((inView.frame.width-250)/2, 400, 250, 60)
+            yelpButton.backgroundColor = UIColor.blackColor()
+            yelpButton.setTitle("Check it out on Yelp", forState: UIControlState.Normal)
+            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 20)
+            yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
+            resultBackgroundView.addSubview(yelpButton)
+        }
         
         closeButton = UIButton()
         closeButton.frame = CGRectMake((inView.frame.width-250)/2, backgroundView.frame.height - 95, 250, 60)
@@ -520,6 +530,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         animateViews()
         println(result.name)
+    }
+    
+    func showYelpView(sender: UIButton!) {
+        println("GO TO YELP")
     }
     
     func dismissResultView(sender: UIButton!) {
