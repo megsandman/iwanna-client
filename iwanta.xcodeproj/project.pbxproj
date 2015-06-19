@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86C2B5D91B33D84700CE4638 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C2B5D71B33D84700CE4638 /* Fabric.framework */; };
+		86C2B5DA1B33D84700CE4638 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C2B5D81B33D84700CE4638 /* Crashlytics.framework */; };
 		86C832151B334FBD00A5A85B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C832141B334FBD00A5A85B /* AppDelegate.swift */; };
 		86C8321A1B334FBD00A5A85B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C832181B334FBD00A5A85B /* Main.storyboard */; };
 		86C8321C1B334FBD00A5A85B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C8321B1B334FBD00A5A85B /* Images.xcassets */; };
@@ -28,7 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		86C8320F1B334FBD00A5A85B /* i want a.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i want a.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C2B5D71B33D84700CE4638 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
+		86C2B5D81B33D84700CE4638 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		86C8320F1B334FBD00A5A85B /* i wanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i wanna.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C832131B334FBD00A5A85B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C832141B334FBD00A5A85B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C832191B334FBD00A5A85B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C2B5DA1B33D84700CE4638 /* Crashlytics.framework in Frameworks */,
+				86C2B5D91B33D84700CE4638 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +78,7 @@
 		86C832101B334FBD00A5A85B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86C8320F1B334FBD00A5A85B /* i want a.app */,
+				86C8320F1B334FBD00A5A85B /* i wanna.app */,
 				86C832241B334FBD00A5A85B /* iwantaTests.xctest */,
 			);
 			name = Products;
@@ -81,6 +87,8 @@
 		86C832111B334FBD00A5A85B /* iwanta */ = {
 			isa = PBXGroup;
 			children = (
+				86C2B5D71B33D84700CE4638 /* Fabric.framework */,
+				86C2B5D81B33D84700CE4638 /* Crashlytics.framework */,
 				86C832141B334FBD00A5A85B /* AppDelegate.swift */,
 				86C832181B334FBD00A5A85B /* Main.storyboard */,
 				86C8321B1B334FBD00A5A85B /* Images.xcassets */,
@@ -128,6 +136,7 @@
 				86C8320B1B334FBD00A5A85B /* Sources */,
 				86C8320C1B334FBD00A5A85B /* Frameworks */,
 				86C8320D1B334FBD00A5A85B /* Resources */,
+				86C2B5D61B33D7FB00CE4638 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -135,7 +144,7 @@
 			);
 			name = iwanta;
 			productName = iwanta;
-			productReference = 86C8320F1B334FBD00A5A85B /* i want a.app */;
+			productReference = 86C8320F1B334FBD00A5A85B /* i wanna.app */;
 			productType = "com.apple.product-type.application";
 		};
 		86C832231B334FBD00A5A85B /* iwantaTests */ = {
@@ -213,6 +222,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		86C2B5D61B33D7FB00CE4638 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 9b2182b01e1ea8659edc565d1fc7411d3a5cc272 c3ab63feb575d19dc0174c4c5e0d37bdfcc689b3ff02bfea0531329fba353656";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		86C8320B1B334FBD00A5A85B /* Sources */ = {
@@ -300,6 +325,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -338,6 +364,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -350,9 +377,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iwanta",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = iwanta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "i want a";
+				PRODUCT_NAME = "i wanna";
 			};
 			name = Debug;
 		};
@@ -361,9 +394,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iwanta",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = iwanta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "i want a";
+				PRODUCT_NAME = "i wanna";
 			};
 			name = Release;
 		};
