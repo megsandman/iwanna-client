@@ -157,8 +157,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         getNeighborhoods()
         getFood()
         getDrinks()
-        println("7")
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -300,8 +298,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             titleData = neighborhoods[row].name
         }
         
-        
-        
         var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "AvenirNext-Regular", size: 20.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()])
         return myTitle
     }
@@ -331,25 +327,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         })
         
         task.resume()
-//        /USING HTTP HELPER
-//        // Create HTTP request and set request Body
-//        var url = "activities"
-//        let httpRequest = httpHelper.buildRequest(url, method: "GET", authType: HTTPRequestAuthType.HTTPTokenAuth)
-//        
-//        // Send HTTP request to load products
-//        httpHelper.sendRequest(httpRequest, completion: {(data:NSData!, error:NSError!) in
-//            // Display error
-//            if error != nil {
-//                let errorMessage = self.httpHelper.getErrorMessage(error)
-//                let errorAlert = UIAlertView(title:"Error", message:error.localizedDescription as String, delegate:nil,
-//                    cancelButtonTitle:"OK")
-//                errorAlert.show()
-//                return
-//            }
-//            // Parse JSON data
-//            
-//            self.categories = self.parseJsonData(data)
-//        })
     }
     
     func getNeighborhoods() {
@@ -373,26 +350,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         })
         
         task.resume()
-        
-//        // Create HTTP request and set request Body
-//        var url = "neighborhoods"
-//        let httpRequest = httpHelper.buildRequest(url, method: "GET", authType: HTTPRequestAuthType.HTTPTokenAuth)
-//        
-//        // Send HTTP request to load products
-//        httpHelper.sendRequest(httpRequest, completion: {(data:NSData!, error:NSError!) in
-//            // Display error
-//            if error != nil {
-//                let errorMessage = self.httpHelper.getErrorMessage(error)
-//                let errorAlert = UIAlertView(title:"Error", message:error.localizedDescription as String, delegate:nil,
-//                    cancelButtonTitle:"OK")
-//                errorAlert.show()
-//                return
-//            }
-//            // Parse JSON data
-//            
-//            self.neighborhoods = self.parseJsonData(data)
-//        })
-        
     }
     
     func getFood() {
@@ -416,26 +373,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         })
         
         task.resume()
-        
-//        // Create HTTP request and set request Body
-//        var url = "genres/2"
-//        let httpRequest = httpHelper.buildRequest(url, method: "GET", authType: HTTPRequestAuthType.HTTPTokenAuth)
-//        
-//        // Send HTTP request to load products
-//        httpHelper.sendRequest(httpRequest, completion: {(data:NSData!, error:NSError!) in
-//            // Display error
-//            if error != nil {
-//                let errorMessage = self.httpHelper.getErrorMessage(error)
-//                let errorAlert = UIAlertView(title:"Error", message:error.localizedDescription as String, delegate:nil,
-//                    cancelButtonTitle:"OK")
-//                errorAlert.show()
-//                return
-//            }
-//            // Parse JSON data
-//            
-//            self.foodGenres = self.parseJsonData(data)
-//        })
-        
     }
     
     func getDrinks() {
@@ -459,26 +396,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         })
         
         task.resume()
-        
-//        // Create HTTP request and set request Body
-//        var url = "genres/1"
-//        let httpRequest = httpHelper.buildRequest(url, method: "GET", authType: HTTPRequestAuthType.HTTPTokenAuth)
-//        
-//        // Send HTTP request to load products
-//        httpHelper.sendRequest(httpRequest, completion: {(data:NSData!, error:NSError!) in
-//            // Display error
-//            if error != nil {
-//                let errorMessage = self.httpHelper.getErrorMessage(error)
-//                let errorAlert = UIAlertView(title:"Error", message:error.localizedDescription as String, delegate:nil,
-//                    cancelButtonTitle:"OK")
-//                errorAlert.show()
-//                return
-//            }
-//            // Parse JSON data
-//            
-//            self.drinkGenres = self.parseJsonData(data)
-//        })
-        
     }
     
     func parseJsonData(data: NSData) -> [Description] {
@@ -504,8 +421,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             descriptions.append(description)
         }
         return descriptions
-        
-        
     }
     
     func getMatch() {
@@ -520,18 +435,17 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                 let request = NSURL(string: urlString)!
                 let urlSession = NSURLSession.sharedSession()
                 let task = urlSession.dataTaskWithURL(request){ (data, response, error) in
-//                    if error != nil {
-//                        let errorMessage = error.localizedDescription
-//                        let errorAlert = UIAlertView(title:"Error", message:error.localizedDescription as String, delegate:nil,
-//                            cancelButtonTitle:"OK")
-//                        errorAlert.show()
-//                        return
-//                    }
+                    if error != nil {
+                        let errorMessage = error.localizedDescription
+                        let errorAlert = UIAlertView(title:"Error", message:error.localizedDescription as String, delegate:nil,
+                            cancelButtonTitle:"OK")
+                        errorAlert.show()
+                        return
+                    }
                     var error:NSError?
                     // Parse JSON data
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                    
                         if let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) {
                             var match = Match(
                                 id: jsonResult["id"] as! Int,
@@ -541,7 +455,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                             self.displayResult(match)
                         }
                     })
-
                 }
                 task.resume()
 
@@ -555,7 +468,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func displayAlertMessage(alertTitle:NSString, alertDescription:NSString) -> Void {
-        // hide activityIndicator view and display alert message
         let errorAlert = UIAlertView(title:alertTitle as String, message:alertDescription as String, delegate:nil, cancelButtonTitle:"OK")
         errorAlert.show()
     }
@@ -597,9 +509,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         animateViews()
         println(result.name)
-
-//        view.addSubview(resultBackgroundView)
-
     }
     
     func dismissResultView(sender: UIButton!) {
@@ -607,9 +516,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         categoryButton.setTitle("CATEGORY", forState: UIControlState.Normal)
         genreButton.setTitle("TYPE", forState: UIControlState.Normal)
         neighborhoodButton.setTitle("NEIGHBORHOOD", forState: UIControlState.Normal)
-
-//        resultBackgroundView.removeFromSuperview()
-
     }
     
     func animateViews() {
