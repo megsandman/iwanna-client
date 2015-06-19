@@ -175,8 +175,13 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func selectGenre(sender: UIButton!) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject("genre", forKey: "buttonPressed")
-        displayPickerView()
-        
+        if (categoryButton.titleLabel!.text == "CATEGORY") {
+            let cateogoryAlert = UIAlertView(title:"Hold up!", message: "Please select a category.", delegate:nil,
+                cancelButtonTitle:"OK")
+            cateogoryAlert.show()
+        } else {
+            displayPickerView()
+        }
     }
     
     func selectNeighborhood(sender: UIButton!) {
@@ -497,7 +502,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultBackgroundView.addSubview(resultLabel)
         
         closeButton = UIButton()
-        closeButton.frame = CGRectMake((inView.frame.width-150)/2, backgroundView.frame.height - 95, 150, 60)
+        closeButton.frame = CGRectMake((inView.frame.width-250)/2, backgroundView.frame.height - 95, 250, 60)
         closeButton.backgroundColor = UIColor.blackColor()
         closeButton.setTitle("TRY AGAIN", forState: UIControlState.Normal)
         closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 40)
