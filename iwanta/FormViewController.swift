@@ -44,6 +44,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     var goToLabel: UILabel!
     var closeButton:UIButton!
     
+    var matchResult:Match!
+    var webView:UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -463,6 +466,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                                 name: jsonResult["name"] as! String,
                                 link: jsonResult["link"] as! String
                             )
+                            self.matchResult = match
                             self.displayResult(match)
                         }
                     })
@@ -514,6 +518,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             yelpButton.setTitle("Check it out on Yelp", forState: UIControlState.Normal)
             yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 20)
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
+            yelpButton.tag = result.id
             resultBackgroundView.addSubview(yelpButton)
         }
         
@@ -533,7 +538,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func showYelpView(sender: UIButton!) {
-        println("GO TO YELP")
+        println(sender.tag)
+        println(matchResult.link)
+        
+        self.performSegueWithIdentifier("showWebView", sender: self)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showWebView") {
+            let newCont = segue.destinationViewController as! WebViewController
+            newCont.matchResult = self.matchResult
+        }
     }
     
     func dismissResultView(sender: UIButton!) {
