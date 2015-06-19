@@ -50,6 +50,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+        
         backgroundView = UIView()
         backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         backgroundView.backgroundColor = UIColor(red: 68.0/255.0, green: 71.0/255.0, blue: 70.0/255.0, alpha: 1.0)
@@ -348,7 +352,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         // GENRES
         iFeelLikeView = UIView()
-        iFeelLikeView.frame = CGRectMake(0, 35 + iNeedView.frame.height, view.frame.width, (view.frame.height-165)/3)
+        iFeelLikeView.frame = CGRectMake(0, 55 + iNeedView.frame.height, view.frame.width, (view.frame.height-165)/3)
         iFeelLikeView.backgroundColor = UIColor.clearColor()
         backgroundView.addSubview(iFeelLikeView)
         
@@ -374,7 +378,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         // NEIGHBORHOODS
         inView = UIView()
-        inView.frame = CGRectMake(0, 35 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-165)/3)
+        inView.frame = CGRectMake(0, 55 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-165)/3)
         inView.backgroundColor = UIColor.clearColor()
         backgroundView.addSubview(inView)
         
@@ -490,7 +494,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func displayResult(result: Match) {
         resultBackgroundView = UIView()
         resultBackgroundView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        resultBackgroundView.backgroundColor = UIColor.blackColor()
+        resultBackgroundView.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
         goToLabel = UILabel()
         goToLabel.text = "Go to"
@@ -514,7 +518,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         if result.id > 0 {
             yelpButton = UIButton()
             yelpButton.frame = CGRectMake((inView.frame.width-250)/2, 400, 250, 60)
-            yelpButton.backgroundColor = UIColor.blackColor()
+            yelpButton.backgroundColor = UIColor.clearColor()
             yelpButton.setTitle("Check it out on Yelp", forState: UIControlState.Normal)
             yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 20)
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
@@ -524,7 +528,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         closeButton = UIButton()
         closeButton.frame = CGRectMake((inView.frame.width-250)/2, backgroundView.frame.height - 95, 250, 60)
-        closeButton.backgroundColor = UIColor.blackColor()
+        closeButton.backgroundColor = UIColor.clearColor()
         closeButton.setTitle("TRY AGAIN", forState: UIControlState.Normal)
         closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 40)
         closeButton.addTarget(self, action: "dismissResultView:", forControlEvents: .TouchUpInside)
