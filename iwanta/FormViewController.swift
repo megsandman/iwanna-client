@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate {
+class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate, MFMailComposeViewControllerDelegate {
     
     
     var backgroundView:UIView!
@@ -30,7 +31,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     var iFeelLikeView:UIView!
     var iFeelLikeLabel:UILabel!
     var genreButton:UIButton!
-    
+    var addressButton:UIButton!
     
     var inView:UIView!
     var inLabel:UILabel!
@@ -38,6 +39,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     
     var yelpButton:UIButton!
     var helpButton:UIButton!
+    var suggestionButton:UIButton!
+    var dividerView:UIView!
     
     var resultBackgroundView:UIView!
     var resultLabel: UILabel!
@@ -326,7 +329,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func showButtons() {
         // CATEGORIES
         iNeedView = UIView()
-        iNeedView.frame = CGRectMake(0, 35, view.frame.width, (view.frame.height-165)/3)
+        iNeedView.frame = CGRectMake(0, 25, view.frame.width, (view.frame.height-165)/3)
         iNeedView.backgroundColor = UIColor.clearColor()
         backgroundView.addSubview(iNeedView)
         
@@ -352,7 +355,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         // GENRES
         iFeelLikeView = UIView()
-        iFeelLikeView.frame = CGRectMake(0, 55 + iNeedView.frame.height, view.frame.width, (view.frame.height-165)/3)
+        iFeelLikeView.frame = CGRectMake(0, 35 + iNeedView.frame.height, view.frame.width, (view.frame.height-165)/3)
         iFeelLikeView.backgroundColor = UIColor.clearColor()
         backgroundView.addSubview(iFeelLikeView)
         
@@ -378,7 +381,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         // NEIGHBORHOODS
         inView = UIView()
-        inView.frame = CGRectMake(0, 55 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-165)/3)
+        inView.frame = CGRectMake(0, 35 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-165)/3)
         inView.backgroundColor = UIColor.clearColor()
         backgroundView.addSubview(inView)
         
@@ -496,45 +499,74 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultBackgroundView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         resultBackgroundView.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
-        goToLabel = UILabel()
-        goToLabel.text = "Go to"
-        goToLabel.backgroundColor = UIColor.clearColor()
-        goToLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
-        goToLabel.textAlignment = NSTextAlignment.Center
-        goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 120, 200, 40))
-        goToLabel.textColor = UIColor.whiteColor()
-        resultBackgroundView.addSubview(goToLabel)
+        dividerView = UIView()
+        dividerView.frame = CGRectMake(10, self.view.frame.height/3 * 2, self.view.frame.width - 20, 1)
+        dividerView.backgroundColor = UIColor.whiteColor()
+        resultBackgroundView.addSubview(dividerView)
         
         resultLabel = UILabel()
         resultLabel.text = result.name
         resultLabel.backgroundColor = UIColor.clearColor()
-        resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 30)
         resultLabel.textAlignment = NSTextAlignment.Center
         resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 150))
         resultLabel.textColor = UIColor(red: 10.0/255.0, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0)
         resultLabel.numberOfLines = 0
         resultBackgroundView.addSubview(resultLabel)
+
         
         if result.id > 0 {
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, 155, inView.frame.width - 40, 150))
+            resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
+
+            goToLabel = UILabel()
+            goToLabel.text = "Go to"
+            goToLabel.backgroundColor = UIColor.clearColor()
+            goToLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
+            goToLabel.textAlignment = NSTextAlignment.Center
+            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 70, 200, 40))
+            goToLabel.textColor = UIColor.whiteColor()
+            resultBackgroundView.addSubview(goToLabel)
+            
+            addressButton = UIButton()
+            addressButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 40, resultBackgroundView.frame.height/9)
+            addressButton.backgroundColor = UIColor.clearColor()
+            addressButton.setTitle("2070 Fell Street @ Cole Street", forState: UIControlState.Normal)
+            addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
+            addressButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
+            resultBackgroundView.addSubview(addressButton)
+            
             yelpButton = UIButton()
-            yelpButton.frame = CGRectMake((inView.frame.width-250)/2, 400, 250, 60)
+            yelpButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9*2, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             yelpButton.backgroundColor = UIColor.clearColor()
-            yelpButton.setTitle("Check it out on Yelp", forState: UIControlState.Normal)
-            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 20)
+            yelpButton.setTitle("Check out the details on Yelp.", forState: UIControlState.Normal)
+            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
             yelpButton.tag = result.id
             resultBackgroundView.addSubview(yelpButton)
+        } else {
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, 150, inView.frame.width - 40, 150))
+            resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 30)
+
+            suggestionButton = UIButton()
+            suggestionButton.frame = CGRectMake(20, 400, inView.frame.width - 40, 60)
+            suggestionButton.backgroundColor = UIColor.clearColor()
+            suggestionButton.setTitle("Have a suggestion? Let us know.", forState: UIControlState.Normal)
+            suggestionButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
+            suggestionButton.addTarget(self, action: "showEmailView:", forControlEvents: .TouchUpInside)
+            resultBackgroundView.addSubview(suggestionButton)
         }
         
         closeButton = UIButton()
-        closeButton.frame = CGRectMake((inView.frame.width-250)/2, backgroundView.frame.height - 95, 250, 60)
+//        closeButton.frame = CGRectMake((inView.frame.width-250)/2, backgroundView.frame.height - 95, 250, 60)
+        closeButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
+
         closeButton.backgroundColor = UIColor.clearColor()
-        closeButton.setTitle("TRY AGAIN", forState: UIControlState.Normal)
-        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 40)
+        closeButton.setTitle("Try Again", forState: UIControlState.Normal)
+        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
         closeButton.addTarget(self, action: "dismissResultView:", forControlEvents: .TouchUpInside)
-        closeButton.layer.borderWidth = 1;
-        closeButton.layer.borderColor = UIColor.whiteColor().CGColor
-        closeButton.layer.cornerRadius = 5.0
+//        closeButton.layer.borderWidth = 1;
+//        closeButton.layer.borderColor = UIColor.whiteColor().CGColor
+//        closeButton.layer.cornerRadius = 5.0
         resultBackgroundView.addSubview(closeButton)
         
         animateViews()
@@ -547,6 +579,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         self.performSegueWithIdentifier("showWebView", sender: self)
         
+    }
+    
+    func showEmailView(sender: UIButton!) {
+        println("IN EMAIL VIEW")
+        sendEmail(self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -577,6 +614,48 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         UIView.transitionFromView(views.frontView, toView: views.backView, duration: 0.5, options: transitionOptions, completion: nil)
         println("IN ANIMATION")
+    }
+    
+    func sendEmail (sender: AnyObject) {
+        if MFMailComposeViewController.canSendMail() {
+            var composer = MFMailComposeViewController()
+            
+            composer.mailComposeDelegate = self
+            composer.setToRecipients(["margaret.sandman@gmail.com"])
+            composer.navigationBar.tintColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1.0)
+            
+            //            presentViewController(composer, animated: true, completion: nil)
+            presentViewController(composer, animated: true, completion: {
+                
+                UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+                
+                //setStatusBarStyle:UIStatusBarStyleLightContent];
+                
+            })
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        
+        switch result.value {
+        case MFMailComposeResultCancelled.value:
+            println("Mail cancelled")
+            
+        case MFMailComposeResultSaved.value:
+            println("Mail saved")
+            
+        case MFMailComposeResultSent.value:
+            println("Mail sent")
+            
+        case MFMailComposeResultFailed.value:
+            println("Failed to send mail: \(error.localizedDescription)")
+            
+        default:
+            break
+        }
+        
+        // Dismiss the Mail interface
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
