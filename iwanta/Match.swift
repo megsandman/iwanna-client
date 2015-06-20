@@ -12,6 +12,7 @@ class Match {
     var id:Int = 0
     var name:String = ""
     var link:String = ""
+    var address:String = ""
     
     init(id:Int, name:String, link:String) {
         self.id = id

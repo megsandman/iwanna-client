@@ -475,6 +475,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                                 name: jsonResult["name"] as! String,
                                 link: jsonResult["link"] as! String
                             )
+                            
+                            var jsonAddress: String? = jsonResult["address"] as? String
+                            match.address = jsonAddress ?? "2070 Fell Street"
+                            
                             self.matchResult = match
                             self.displayResult(match)
                         }
@@ -550,7 +554,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             addressButton = UIButton()
             addressButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             addressButton.backgroundColor = UIColor.clearColor()
-            addressButton.setTitle("2070 Fell Street @ Cole Street", forState: UIControlState.Normal)
+            addressButton.setTitle(result.address, forState: UIControlState.Normal)
             addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             addressButton.addTarget(self, action: "showMapView:", forControlEvents: .TouchUpInside)
             resultBackgroundView.addSubview(addressButton)
