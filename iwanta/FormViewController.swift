@@ -41,7 +41,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     var helpButton:UIButton!
     var suggestionButton:UIButton!
     var dividerView:UIView!
-    
+    var dividerView2:UIView!
+    var dividerView3:UIView!
+
     var resultBackgroundView:UIView!
     var resultLabel: UILabel!
     var goToLabel: UILabel!
@@ -504,6 +506,16 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         dividerView.backgroundColor = UIColor.whiteColor()
         resultBackgroundView.addSubview(dividerView)
         
+        dividerView2 = UIView()
+        dividerView2.frame = CGRectMake(10, self.view.frame.height/9 * 7, self.view.frame.width - 20, 0.5)
+        dividerView2.backgroundColor = UIColor.whiteColor()
+        resultBackgroundView.addSubview(dividerView2)
+        
+        dividerView3 = UIView()
+        dividerView3.frame = CGRectMake(10, self.view.frame.height/9 * 8, self.view.frame.width - 20, 0.5)
+        dividerView3.backgroundColor = UIColor.whiteColor()
+        resultBackgroundView.addSubview(dividerView3)
+        
         resultLabel = UILabel()
         resultLabel.text = result.name
         resultLabel.backgroundColor = UIColor.clearColor()
@@ -512,11 +524,19 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultLabel.textColor = UIColor(red: 10.0/255.0, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0)
         resultLabel.numberOfLines = 0
         resultBackgroundView.addSubview(resultLabel)
-
+        
+        closeButton = UIButton()
+        closeButton.backgroundColor = UIColor.clearColor()
+        closeButton.setTitle("Try Again", forState: UIControlState.Normal)
+        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
+        closeButton.addTarget(self, action: "dismissResultView:", forControlEvents: .TouchUpInside)
+        resultBackgroundView.addSubview(closeButton)
         
         if result.id > 0 {
             resultLabel.frame = CGRectIntegral(CGRectMake(20, 155, inView.frame.width - 40, 150))
             resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
+            
+            closeButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
 
             goToLabel = UILabel()
             goToLabel.text = "Go to"
@@ -532,7 +552,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             addressButton.backgroundColor = UIColor.clearColor()
             addressButton.setTitle("2070 Fell Street @ Cole Street", forState: UIControlState.Normal)
             addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
-            addressButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
+            addressButton.addTarget(self, action: "showMapView:", forControlEvents: .TouchUpInside)
             resultBackgroundView.addSubview(addressButton)
             
             yelpButton = UIButton()
@@ -543,31 +563,21 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
             yelpButton.tag = result.id
             resultBackgroundView.addSubview(yelpButton)
+            
         } else {
             resultLabel.frame = CGRectIntegral(CGRectMake(20, 150, inView.frame.width - 40, 150))
             resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 30)
+            
+            closeButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9*2, inView.frame.width - 40, resultBackgroundView.frame.height/9)
 
             suggestionButton = UIButton()
-            suggestionButton.frame = CGRectMake(20, 400, inView.frame.width - 40, 60)
+            suggestionButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             suggestionButton.backgroundColor = UIColor.clearColor()
             suggestionButton.setTitle("Have a suggestion? Let us know.", forState: UIControlState.Normal)
             suggestionButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             suggestionButton.addTarget(self, action: "showEmailView:", forControlEvents: .TouchUpInside)
             resultBackgroundView.addSubview(suggestionButton)
         }
-        
-        closeButton = UIButton()
-//        closeButton.frame = CGRectMake((inView.frame.width-250)/2, backgroundView.frame.height - 95, 250, 60)
-        closeButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
-
-        closeButton.backgroundColor = UIColor.clearColor()
-        closeButton.setTitle("Try Again", forState: UIControlState.Normal)
-        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
-        closeButton.addTarget(self, action: "dismissResultView:", forControlEvents: .TouchUpInside)
-//        closeButton.layer.borderWidth = 1;
-//        closeButton.layer.borderColor = UIColor.whiteColor().CGColor
-//        closeButton.layer.cornerRadius = 5.0
-        resultBackgroundView.addSubview(closeButton)
         
         animateViews()
         println(result.name)
@@ -579,6 +589,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         self.performSegueWithIdentifier("showWebView", sender: self)
         
+    }
+    
+    func showMapView(sender: UIButton!) {
+        println("MAP")
+    
     }
     
     func showEmailView(sender: UIButton!) {
