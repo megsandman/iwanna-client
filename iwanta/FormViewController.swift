@@ -537,17 +537,12 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultBackgroundView.addSubview(closeButton)
         
         if result.id > 0 {
-            resultLabel.frame = CGRectIntegral(CGRectMake(20, 155, inView.frame.width - 40, 150))
-            resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
-            
-            closeButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
-
             goToLabel = UILabel()
             goToLabel.text = "Go to"
             goToLabel.backgroundColor = UIColor.clearColor()
             goToLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
             goToLabel.textAlignment = NSTextAlignment.Center
-            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 70, 200, 40))
+            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 50, 200, (resultBackgroundView.frame.height/3*2 - 50)/3))
             goToLabel.textColor = UIColor.whiteColor()
             resultBackgroundView.addSubview(goToLabel)
             
@@ -567,6 +562,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
             yelpButton.tag = result.id
             resultBackgroundView.addSubview(yelpButton)
+            
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, 20 + goToLabel.frame.height, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
+            resultLabel.font = UIFont(name: "AvenirNext-Regular", size: 50)
+            
+            closeButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             
         } else {
             resultLabel.frame = CGRectIntegral(CGRectMake(20, 150, inView.frame.width - 40, 150))
