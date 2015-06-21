@@ -558,6 +558,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             yelpButton = UIButton()
             yelpButton.frame = CGRectMake(20, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9*2, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             yelpButton.backgroundColor = UIColor.clearColor()
+//            yelpButton.setBackgroundImage(UIImage(named:"yelp1"), forState: UIControlState.Normal)
             yelpButton.setTitle("Check out the details on Yelp.", forState: UIControlState.Normal)
             yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
