@@ -144,7 +144,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "CATEGORY")) {
             genres = drinkGenres
-            categoryButton.setTitle("drinks", forState: UIControlState.Normal)
+            categoryButton.setTitle("drink", forState: UIControlState.Normal)
         } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "TYPE")) {
             genreButton.setTitle("something good", forState: UIControlState.Normal)
         } else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "NEIGHBORHOOD")) {
@@ -200,12 +200,12 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         if buttonPressed == "category" {
             var category = categories[row].name
-            if category == "food" {
+            if category == "eat" {
                 genres = foodGenres
                 categoryButton.setTitle(category, forState: UIControlState.Normal)
             } else {
                 genres = drinkGenres
-                categoryButton.setTitle("drinks", forState: UIControlState.Normal)
+                categoryButton.setTitle("drink", forState: UIControlState.Normal)
             }
         } else if buttonPressed == "genre" {
             genreButton.setTitle(genres[row].name, forState: UIControlState.Normal)
@@ -336,11 +336,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         backgroundView.addSubview(iNeedView)
         
         iNeedLabel = UILabel()
-        iNeedLabel.text = "I want"
+        iNeedLabel.text = "I wanna"
         iNeedLabel.backgroundColor = UIColor.clearColor()
         iNeedLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
         iNeedLabel.textAlignment = NSTextAlignment.Center
-        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-120)/2, (iNeedView.frame.height - 80) / 3, 120, 40))
+        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 80) / 3, 200, 40))
         iNeedLabel.textColor = UIColor.whiteColor()
         iNeedView.addSubview(iNeedLabel)
         

@@ -26,19 +26,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 let location = placemark.location.coordinate
 //                self.coords = location.coordinate
                 
-                let span = MKCoordinateSpanMake(0.05, 0.05)
+                let span = MKCoordinateSpanMake(0.01, 0.01)
                 let region = MKCoordinateRegion(center: location, span: span)
                 self.mapView.setRegion(region, animated:true)
-                self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = location
+                
+//                let annotation = MKPlacemark(placemark: placemark)
+                annotation.title = self.match.name
+                annotation.subtitle = self.match.address
+//                self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
+                self.mapView.addAnnotation(annotation)
             }
         })
-
-//        let location = CLLocationCoordinate2D(
-//            latitude: 51.50007773,
-//            longitude: -0.1246402
-//        )
-//        
-
         
 //        let annotation = MKPointAnnotation()
 //        annotation.setCoordinate(location)
