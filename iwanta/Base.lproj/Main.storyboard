@@ -21,6 +21,7 @@
                     <navigationItem key="navigationItem" id="R1w-KJ-69J"/>
                     <connections>
                         <segue destination="Aiq-bh-Xo0" kind="push" identifier="showWebView" id="Nu0-8g-hnl"/>
+                        <segue destination="pbd-Aj-SFu" kind="push" identifier="showMapView" id="dgc-3z-xd7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hwb-tj-bDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -60,6 +61,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="auy-5f-9rX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="994" y="278"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="1my-yA-uFN">
+            <objects>
+                <viewController id="pbd-Aj-SFu" customClass="MapViewController" customModule="i_wanna" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h7F-2z-LdF"/>
+                        <viewControllerLayoutGuide type="bottom" id="nfn-w9-owg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fso-Ak-5QJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iOs-aA-p07">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iOs-aA-p07" firstAttribute="top" secondItem="fso-Ak-5QJ" secondAttribute="topMargin" id="P2b-ro-Jbp"/>
+                            <constraint firstItem="iOs-aA-p07" firstAttribute="leading" secondItem="fso-Ak-5QJ" secondAttribute="leadingMargin" constant="-16" id="eEp-O8-ghg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iOs-aA-p07" secondAttribute="trailing" constant="-16" id="svx-kr-Fm6"/>
+                            <constraint firstItem="nfn-w9-owg" firstAttribute="top" secondItem="iOs-aA-p07" secondAttribute="bottom" id="z5d-27-mas"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FxZ-L3-Ev8"/>
+                    <connections>
+                        <outlet property="mapView" destination="iOs-aA-p07" id="iDM-zh-zmc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hf1-My-rwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="585" y="959"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ft1-qx-uBM">

@@ -17,6 +17,7 @@
 		86C832351B334FDE00A5A85B /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C832341B334FDE00A5A85B /* FormViewController.swift */; };
 		86C832371B334FEB00A5A85B /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C832361B334FEB00A5A85B /* Match.swift */; };
 		86C832391B334FF700A5A85B /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C832381B334FF700A5A85B /* Description.swift */; };
+		86DB60DC1B3734D6000334A9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB60DB1B3734D6000334A9 /* MapViewController.swift */; };
 		86F1DE701B34A1AF00ED4DB1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F1DE6F1B34A1AF00ED4DB1 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		86C832341B334FDE00A5A85B /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		86C832361B334FEB00A5A85B /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		86C832381B334FF700A5A85B /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
+		86DB60DB1B3734D6000334A9 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		86F1DE6F1B34A1AF00ED4DB1 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 				86C832361B334FEB00A5A85B /* Match.swift */,
 				86C832381B334FF700A5A85B /* Description.swift */,
 				86F1DE6F1B34A1AF00ED4DB1 /* WebViewController.swift */,
+				86DB60DB1B3734D6000334A9 /* MapViewController.swift */,
 			);
 			path = iwanta;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C832391B334FF700A5A85B /* Description.swift in Sources */,
+				86DB60DC1B3734D6000334A9 /* MapViewController.swift in Sources */,
 				86C832351B334FDE00A5A85B /* FormViewController.swift in Sources */,
 				86C832151B334FBD00A5A85B /* AppDelegate.swift in Sources */,
 				86F1DE701B34A1AF00ED4DB1 /* WebViewController.swift in Sources */,

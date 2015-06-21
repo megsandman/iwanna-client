@@ -478,7 +478,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                             
                             var jsonAddress: String? = jsonResult["address"] as? String
                             match.address = jsonAddress ?? "2070 Fell Street"
-                            
+                            match.city = "San Francisco"
+                            match.state = "CA"
                             self.matchResult = match
                             self.displayResult(match)
                         }
@@ -592,12 +593,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         println(matchResult.link)
         
         self.performSegueWithIdentifier("showWebView", sender: self)
-        
     }
     
     func showMapView(sender: UIButton!) {
         println("MAP")
-    
+        self.performSegueWithIdentifier("showMapView", sender: self)
     }
     
     func showEmailView(sender: UIButton!) {
@@ -609,6 +609,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         if (segue.identifier == "showWebView") {
             let newCont = segue.destinationViewController as! WebViewController
             newCont.matchResult = self.matchResult
+        } else if (segue.identifier == "showMapView") {
+            let newCont = segue.destinationViewController as! MapViewController
+            newCont.match = self.matchResult
         }
     }
     

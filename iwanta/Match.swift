@@ -13,6 +13,10 @@ class Match {
     var name:String = ""
     var link:String = ""
     var address:String = ""
+    var city:String = ""
+    var state:String = ""
+    var zipCode:String = ""
+    
     
     init(id:Int, name:String, link:String) {
         self.id = id
