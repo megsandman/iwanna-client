@@ -543,7 +543,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         closeButton = UIButton()
         closeButton.backgroundColor = UIColor.clearColor()
         closeButton.setTitle("Try Again", forState: UIControlState.Normal)
-        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 16)
+        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
         closeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         closeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         closeButton.addTarget(self, action: "dismissResultView:", forControlEvents: .TouchUpInside)
@@ -577,7 +577,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             addressButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 55, resultBackgroundView.frame.height/9)
             addressButton.backgroundColor = UIColor.clearColor()
             addressButton.setTitle(result.address, forState: UIControlState.Normal)
-            addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 16)
+            addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
             addressButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             addressButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             addressButton.addTarget(self, action: "showMapView:", forControlEvents: .TouchUpInside)
@@ -587,7 +587,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             yelpButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9 * 2, inView.frame.width - 55, resultBackgroundView.frame.height/9)
             yelpButton.backgroundColor = UIColor.clearColor()
             yelpButton.setTitle("Check out the details on Yelp.", forState: UIControlState.Normal)
-            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 16)
+            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
             yelpButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             yelpButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
@@ -617,7 +617,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             suggestionButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 55, resultBackgroundView.frame.height/9)
             suggestionButton.backgroundColor = UIColor.clearColor()
             suggestionButton.setTitle("Have a suggestion? Let us know.", forState: UIControlState.Normal)
-            suggestionButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 16)
+            suggestionButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
             suggestionButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             suggestionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             suggestionButton.addTarget(self, action: "showEmailView:", forControlEvents: .TouchUpInside)
