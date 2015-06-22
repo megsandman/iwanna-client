@@ -16,7 +16,7 @@
                     <view key="view" contentMode="scaleToFill" id="ycG-pM-aGA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.25490196078431371" green="0.87450980392156863" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="R1w-KJ-69J"/>
                     <connections>
