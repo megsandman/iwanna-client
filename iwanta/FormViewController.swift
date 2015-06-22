@@ -97,7 +97,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func selectGenre(sender: UIButton!) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject("genre", forKey: "buttonPressed")
-        if (categoryButton.titleLabel!.text == "CATEGORY") {
+        if (categoryButton.titleLabel!.text == "category") {
             let cateogoryAlert = UIAlertView(title:"Hold up!", message: "Please select a category first.", delegate:nil,
                 cancelButtonTitle:"OK")
             cateogoryAlert.show()
@@ -148,12 +148,14 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         let defaults = NSUserDefaults.standardUserDefaults()
         var defaultValue = defaults.objectForKey("buttonPressed") as! String
         
-        if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "CATEGORY")) {
+        if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "category")) {
             genres = drinkGenres
             categoryButton.setTitle("drink", forState: UIControlState.Normal)
-        } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "TYPE")) {
+        } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "type") && (categoryButton.titleLabel!.text == "drink")) {
             genreButton.setTitle("something good", forState: UIControlState.Normal)
-        } else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "NEIGHBORHOOD")) {
+        }  else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "type") && (categoryButton.titleLabel!.text == "eat")) {
+            genreButton.setTitle("something yummy", forState: UIControlState.Normal)
+        }else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "neighborhood")) {
             neighborhoodButton.setTitle("Doesn't Matter", forState: UIControlState.Normal)
         }
         pickerBackgroundView.removeFromSuperview()
@@ -342,7 +344,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         backgroundView.addSubview(iNeedView)
         
         iNeedLabel = UILabel()
-        iNeedLabel.text = "I wanna"
+        iNeedLabel.text = "I wanna..."
         iNeedLabel.backgroundColor = UIColor.clearColor()
         iNeedLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iNeedLabel.textAlignment = NSTextAlignment.Center
@@ -351,10 +353,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         iNeedView.addSubview(iNeedLabel)
         
         categoryButton = UIButton()
-        categoryButton.frame = CGRectMake((iNeedView.frame.width-310)/2, iNeedView.frame.height - (40 + (iNeedView.frame.height - 70) / 3), 310, 70)
+        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - (40 + (iNeedView.frame.height - 70) / 3), 290, 50)
         categoryButton.backgroundColor = UIColor.whiteColor()
-        categoryButton.setTitle("CATEGORY", forState: UIControlState.Normal)
-        categoryButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 35)
+        categoryButton.setTitle("category", forState: UIControlState.Normal)
+        categoryButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
         categoryButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         categoryButton.addTarget(self, action: "selectCategory:", forControlEvents: .TouchUpInside)
         categoryButton.layer.borderWidth = 1;
@@ -369,19 +371,19 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         backgroundView.addSubview(iFeelLikeView)
         
         iFeelLikeLabel = UILabel()
-        iFeelLikeLabel.text = "I feel like"
+        iFeelLikeLabel.text = "and feel like..."
         iFeelLikeLabel.backgroundColor = UIColor.clearColor()
         iFeelLikeLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iFeelLikeLabel.textAlignment = NSTextAlignment.Center
-        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-200)/2, (iFeelLikeView.frame.height - 80) / 3, 200, 40))
+        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 80) / 3, 300, 40))
         iFeelLikeLabel.textColor = UIColor.whiteColor()
         iFeelLikeView.addSubview(iFeelLikeLabel)
         
         genreButton = UIButton()
-        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-310)/2, iFeelLikeView.frame.height - (40 + (iFeelLikeView.frame.height - 70) / 3), 310, 70)
+        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - (40 + (iFeelLikeView.frame.height - 70) / 3), 290, 50)
         genreButton.backgroundColor = UIColor.whiteColor()
-        genreButton.setTitle("TYPE", forState: UIControlState.Normal)
-        genreButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 35)
+        genreButton.setTitle("type", forState: UIControlState.Normal)
+        genreButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
         genreButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         genreButton.addTarget(self, action: "selectGenre:", forControlEvents: .TouchUpInside)
         genreButton.layer.borderWidth = 1;
@@ -396,7 +398,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         backgroundView.addSubview(inView)
         
         inLabel = UILabel()
-        inLabel.text = "in"
+        inLabel.text = "in..."
         inLabel.backgroundColor = UIColor.clearColor()
         inLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         inLabel.textAlignment = NSTextAlignment.Center
@@ -405,10 +407,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         inView.addSubview(inLabel)
         
         neighborhoodButton = UIButton()
-        neighborhoodButton.frame = CGRectMake((inView.frame.width-310)/2, inView.frame.height - (40 + (inView.frame.height - 70) / 3), 310, 70)
+        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - (40 + (inView.frame.height - 70) / 3), 290, 50)
         neighborhoodButton.backgroundColor = UIColor.whiteColor()
-        neighborhoodButton.setTitle("NEIGHBORHOOD", forState: UIControlState.Normal)
-        neighborhoodButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 35)
+        neighborhoodButton.setTitle("neighborhood", forState: UIControlState.Normal)
+        neighborhoodButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
         neighborhoodButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         neighborhoodButton.addTarget(self, action: "selectNeighborhood:", forControlEvents: .TouchUpInside)
         neighborhoodButton.layer.borderWidth = 1;
@@ -421,7 +423,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         helpButton = UIButton()
         helpButton.frame = CGRectMake((inView.frame.width-150)/2, backgroundView.frame.height - 95, 150, 60)
         helpButton.backgroundColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0)
-        helpButton.setTitle("HELP!", forState: UIControlState.Normal)
+        helpButton.setTitle("help!", forState: UIControlState.Normal)
         helpButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 40)
         helpButton.addTarget(self, action: "helpClicked:", forControlEvents: .TouchUpInside)
         helpButton.layer.borderWidth = 1;
@@ -543,7 +545,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         closeButton = UIButton()
         closeButton.backgroundColor = UIColor.clearColor()
         closeButton.setTitle("Try Again", forState: UIControlState.Normal)
-        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
+        closeButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
         closeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         closeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         closeButton.addTarget(self, action: "dismissResultView:", forControlEvents: .TouchUpInside)
@@ -555,7 +557,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             goToLabel.backgroundColor = UIColor.clearColor()
             goToLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
             goToLabel.textAlignment = NSTextAlignment.Center
-            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 50, 200, (resultBackgroundView.frame.height/3*2 - 50)/3))
+            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 70, 200, (resultBackgroundView.frame.height/3*2 - 50)/3-20))
             goToLabel.textColor = UIColor.whiteColor()
             resultBackgroundView.addSubview(goToLabel)
          
@@ -577,7 +579,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             addressButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 55, resultBackgroundView.frame.height/9)
             addressButton.backgroundColor = UIColor.clearColor()
             addressButton.setTitle(result.address, forState: UIControlState.Normal)
-            addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
+            addressButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             addressButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             addressButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             addressButton.addTarget(self, action: "showMapView:", forControlEvents: .TouchUpInside)
@@ -586,8 +588,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             yelpButton = UIButton()
             yelpButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9 * 2, inView.frame.width - 55, resultBackgroundView.frame.height/9)
             yelpButton.backgroundColor = UIColor.clearColor()
-            yelpButton.setTitle("Check out the details on Yelp.", forState: UIControlState.Normal)
-            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
+            yelpButton.setTitle("Check out the details on Yelp", forState: UIControlState.Normal)
+            yelpButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             yelpButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             yelpButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             yelpButton.addTarget(self, action: "showYelpView:", forControlEvents: .TouchUpInside)
@@ -596,7 +598,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             
             closeButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             
-            resultLabel.frame = CGRectIntegral(CGRectMake(20, 20 + goToLabel.frame.height, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, goToLabel.frame.height, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
             resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 50)
             
         } else {
@@ -617,7 +619,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             suggestionButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/3, inView.frame.width - 55, resultBackgroundView.frame.height/9)
             suggestionButton.backgroundColor = UIColor.clearColor()
             suggestionButton.setTitle("Have a suggestion? Let us know.", forState: UIControlState.Normal)
-            suggestionButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 18)
+            suggestionButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 16)
             suggestionButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             suggestionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             suggestionButton.addTarget(self, action: "showEmailView:", forControlEvents: .TouchUpInside)
@@ -659,9 +661,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     
     func dismissResultView(sender: UIButton!) {
         animateViews()
-        categoryButton.setTitle("CATEGORY", forState: UIControlState.Normal)
-        genreButton.setTitle("TYPE", forState: UIControlState.Normal)
-        neighborhoodButton.setTitle("NEIGHBORHOOD", forState: UIControlState.Normal)
+        categoryButton.setTitle("category", forState: UIControlState.Normal)
+        genreButton.setTitle("type", forState: UIControlState.Normal)
+        neighborhoodButton.setTitle("neighborhood", forState: UIControlState.Normal)
     }
     
     func animateViews() {
