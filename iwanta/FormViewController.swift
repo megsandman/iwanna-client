@@ -77,6 +77,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         backgroundImageView.image = UIImage(named:"grey_background")
         backgroundView.addSubview(backgroundImageView)
         
+        resultBackgroundView = UIView()
+        resultBackgroundView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        resultBackgroundView.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        
         getCategories()
         getNeighborhoods()
         getFood()
@@ -514,9 +518,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func displayResult(result: Match) {
-        resultBackgroundView = UIView()
-        resultBackgroundView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        resultBackgroundView.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
         dividerView = UIView()
         dividerView.frame = CGRectMake(10, self.view.frame.height/3 * 2, self.view.frame.width - 20, 1)
@@ -664,6 +665,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         categoryButton.setTitle("category", forState: UIControlState.Normal)
         genreButton.setTitle("type", forState: UIControlState.Normal)
         neighborhoodButton.setTitle("neighborhood", forState: UIControlState.Normal)
+        var subViews = resultBackgroundView.subviews
+        for subview in subViews{
+            subview.removeFromSuperview()
+        }
+//        resultBackgroundView.removeFromSuperview()
     }
     
     func animateViews() {
