@@ -62,15 +62,15 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         super.viewDidLoad()
         println("CITYID")
         println(cityId)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.translucent = true
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
         backgroundView = UIView()
         backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
-        backgroundView.backgroundColor = UIColor(red: 68.0/255.0, green: 71.0/255.0, blue: 70.0/255.0, alpha: 1.0)
+        backgroundView.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         backgroundView.contentMode = .ScaleAspectFill
         backgroundView.userInteractionEnabled = true
         view.addSubview(backgroundView)
@@ -78,7 +78,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         backgroundImageView = UIImageView()
         backgroundImageView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         backgroundImageView.image = UIImage(named:"grey_background")
-        backgroundView.addSubview(backgroundImageView)
+//        backgroundView.addSubview(backgroundImageView)
         
         resultBackgroundView = UIView()
         resultBackgroundView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)

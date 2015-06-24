@@ -10,7 +10,7 @@ import UIKit
 
 class CityTableViewController: UITableViewController {
     
-    var citiesArray = [Description]()
+    var citiesArray = [City]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +41,9 @@ class CityTableViewController: UITableViewController {
         task.resume()
     }
     
-    func parseJsonData(data: NSData) -> [Description] {
+    func parseJsonData(data: NSData) -> [City] {
         var error:NSError?
-        var descriptions: [Description] = []
+        var cities: [City] = []
         
         var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSArray
         
@@ -56,15 +56,15 @@ class CityTableViewController: UITableViewController {
         var jsonProducts = jsonResult as! [AnyObject]
         for jsonProduct in jsonProducts {
             
-            var description = Description(
+            var city = City(
                 name: jsonProduct["name"] as! String,
                 image: jsonProduct["image"] as! String
             )
-            description.id = jsonProduct["id"] as! Int
+            city.id = jsonProduct["id"] as! Int
 
-            descriptions.append(description)
+            cities.append(city)
         }
-        return descriptions
+        return cities
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,7 +91,7 @@ class CityTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CustomTableViewCell
         
         // Configure the cell...
-        let urlString = "http://i.imgur.com/zIcycg8.jpg"
+        let urlString = citiesArray[indexPath.row].image
         let imgURL = NSURL(string: urlString)
         
         cell.nameLabel.text = citiesArray[indexPath.row].name
