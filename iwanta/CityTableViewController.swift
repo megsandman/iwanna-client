@@ -16,8 +16,6 @@ class CityTableViewController: UITableViewController {
         super.viewDidLoad()
         getCities()
         tableView.rowHeight = 150
-        self.navigationController?.navigationBar.translucent = false
-        UINavigationBar.appearance().barTintColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
     
     func getCities() {
@@ -59,7 +57,8 @@ class CityTableViewController: UITableViewController {
         for jsonProduct in jsonProducts {
             
             var description = Description(
-                name: jsonProduct["name"] as! String
+                name: jsonProduct["name"] as! String,
+                image: jsonProduct["image"] as! String
             )
             description.id = jsonProduct["id"] as! Int
 

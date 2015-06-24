@@ -66,6 +66,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
         backgroundView = UIView()
         backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         backgroundView.backgroundColor = UIColor(red: 68.0/255.0, green: 71.0/255.0, blue: 70.0/255.0, alpha: 1.0)

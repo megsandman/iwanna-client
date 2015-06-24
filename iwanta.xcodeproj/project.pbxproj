@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		863EFF871B3B0F46009FC0A4 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863EFF861B3B0F46009FC0A4 /* City.swift */; };
 		868F22001B3A249B00E9B168 /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F21FF1B3A249B00E9B168 /* CityTableViewController.swift */; };
 		868F22021B3A28D400E9B168 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F22011B3A28D400E9B168 /* CustomTableViewCell.swift */; };
 		868F223C1B3A2AA300E9B168 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 868F22061B3A2AA300E9B168 /* AFHTTPRequestOperation.m */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		863EFF861B3B0F46009FC0A4 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		868F21FF1B3A249B00E9B168 /* CityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
 		868F22011B3A28D400E9B168 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		868F22051B3A2AA300E9B168 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				868F21FF1B3A249B00E9B168 /* CityTableViewController.swift */,
 				868F22011B3A28D400E9B168 /* CustomTableViewCell.swift */,
 				868F224D1B3A2ACA00E9B168 /* Bridge-File.h */,
+				863EFF861B3B0F46009FC0A4 /* City.swift */,
 			);
 			path = iwanta;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				868F223F1B3A2AA300E9B168 /* AFNetworkReachabilityManager.m in Sources */,
 				868F224C1B3A2AA300E9B168 /* UIWebView+AFNetworking.m in Sources */,
 				868F22431B3A2AA300E9B168 /* AFURLResponseSerialization.m in Sources */,
+				863EFF871B3B0F46009FC0A4 /* City.swift in Sources */,
 				86C832371B334FEB00A5A85B /* Match.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
