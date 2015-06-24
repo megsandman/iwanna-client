@@ -11,7 +11,7 @@ import MessageUI
 
 class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate, MFMailComposeViewControllerDelegate {
     
-    
+    var cityId:Int!
     var backgroundView:UIView!
     var backgroundImageView: UIImageView!
     var categories: [Description]! = []
@@ -60,7 +60,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        println("CITYID")
+        println(cityId)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
@@ -455,8 +456,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             let description = Description(
                 name: jsonProduct["name"] as! String
             )
-            println(description.name)
-            println("NAME")
+
             descriptions.append(description)
         }
         return descriptions

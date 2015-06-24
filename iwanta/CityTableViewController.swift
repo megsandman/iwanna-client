@@ -15,8 +15,9 @@ class CityTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getCities()
-        tableView.rowHeight = 100
-
+        tableView.rowHeight = 150
+        self.navigationController?.navigationBar.translucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
     
     func getCities() {
@@ -54,14 +55,14 @@ class CityTableViewController: UITableViewController {
         }
         
         // Parse JSON data
-        let jsonProducts = jsonResult as! [AnyObject]
+        var jsonProducts = jsonResult as! [AnyObject]
         for jsonProduct in jsonProducts {
             
-            let description = Description(
+            var description = Description(
                 name: jsonProduct["name"] as! String
             )
-            println(description.name)
-            println("NAME")
+            description.id = jsonProduct["id"] as! Int
+
             descriptions.append(description)
         }
         return descriptions
@@ -91,7 +92,7 @@ class CityTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CustomTableViewCell
         
         // Configure the cell...
-        let urlString = "http://i.imgur.com/mDl3WVV.jpg"
+        let urlString = "http://i.imgur.com/zIcycg8.jpg"
         let imgURL = NSURL(string: urlString)
         
         cell.nameLabel.text = citiesArray[indexPath.row].name
@@ -99,10 +100,26 @@ class CityTableViewController: UITableViewController {
         cell.cityImageView.setImageWithURL(imgURL!)
         cell.cityImageView.contentMode = .ScaleAspectFill
         cell.cityImageView.clipsToBounds = true
-        println(citiesArray[indexPath.row].name)
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+//        self.performSegueWithIdentifier("showSelectionView", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showSelectionView") {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                let newCont = segue.destinationViewController as! FormViewController
+                println("HERE")
+                println(citiesArray[indexPath.row].id)
+                newCont.cityId = citiesArray[indexPath.row].id
 
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

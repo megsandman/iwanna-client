@@ -9,6 +9,7 @@
 import Foundation
 
 class Description {
+    var id:Int = 0
     var name:String = ""
     
     init(name:String) {
