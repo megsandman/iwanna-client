@@ -18,13 +18,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="aT7-Ue-Ls3"/>
+                    <navigationItem key="navigationItem" id="aT7-Ue-Ls3">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="3Qt-du-N8u">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TQs-hi-XKt">
+                                <rect key="frame" x="16" y="7" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="rectangular4">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="da1-10-Czg" kind="unwind" unwindAction="unwindToHomeScreen:" id="ZDx-Oz-o0D"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Aiq-bh-Xo0" kind="push" identifier="showWebView" id="Nu0-8g-hnl"/>
                         <segue destination="pbd-Aj-SFu" kind="push" identifier="showMapView" id="dgc-3z-xd7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hwb-tj-bDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="da1-10-Czg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="590" y="278"/>
         </scene>
@@ -95,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="585" y="959"/>
         </scene>
-        <!--i wanna-->
+        <!--City Table View Controller-->
         <scene sceneID="ga4-jP-6u2">
             <objects>
                 <tableViewController id="TFh-Y7-0Sb" customClass="CityTableViewController" customModule="i_wanna" customModuleProvider="target" sceneMemberID="viewController">
@@ -103,6 +117,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="OCT-h4-q51" customClass="CustomTableViewCell" customModule="i_wanna" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -121,6 +136,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="MVj-xk-u76" firstAttribute="leading" secondItem="zTu-zJ-ovi" secondAttribute="leadingMargin" constant="-15" id="Nv7-QS-7Au"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="MVj-xk-u76" secondAttribute="trailing" constant="-15" id="Pyt-B9-UYQ"/>
@@ -130,6 +146,7 @@
                                         <constraint firstItem="MVj-xk-u76" firstAttribute="bottom" secondItem="zTu-zJ-ovi" secondAttribute="bottomMargin" constant="9" id="qQc-oQ-zal"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="cityImageView" destination="MVj-xk-u76" id="C2e-0y-0gA"/>
                                     <outlet property="nameLabel" destination="zaw-40-lDp" id="XrD-BF-f7M"/>
@@ -142,7 +159,7 @@
                             <outlet property="delegate" destination="TFh-Y7-0Sb" id="WzJ-VL-pfr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="i wanna" id="ae5-gI-oEN"/>
+                    <navigationItem key="navigationItem" id="ae5-gI-oEN"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tYC-qJ-kOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,6 +184,9 @@
             <point key="canvasLocation" x="58" y="-349"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="rectangular4" width="344" height="344"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

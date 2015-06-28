@@ -16,6 +16,7 @@ class CityTableViewController: UITableViewController {
         super.viewDidLoad()
         getCities()
         tableView.rowHeight = 150
+//        navigationItem.title = ""
     }
     
     func getCities() {
@@ -95,7 +96,7 @@ class CityTableViewController: UITableViewController {
         let imgURL = NSURL(string: urlString)
         
         cell.nameLabel.text = citiesArray[indexPath.row].name
-//        cell.cityImageView.image = UIImage(named: "white")
+        cell.cityImageView.image = UIImage(named: "black")
         cell.cityImageView.setImageWithURL(imgURL!)
         cell.cityImageView.contentMode = .ScaleAspectFill
         cell.cityImageView.clipsToBounds = true
@@ -118,6 +119,10 @@ class CityTableViewController: UITableViewController {
 
             }
         }
+    }
+    
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
+        
     }
 
     /*
