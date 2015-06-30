@@ -18,15 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-//        UINavigationBar.appearance().barTintColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-//        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
 
-        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+//        UINavigationBar.appearance().tintColor = UIColor.blackColor()
 
-        if let barFont = UIFont(name: "AvenirNext-Regular", size: 20.0) {
+        if let barFont = UIFont(name: "AvenirNext-UltraLight", size: 30.0) {
             UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName:barFont]
         }
         
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+
         Fabric.with([Crashlytics()])
 
         return true
