@@ -38,6 +38,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     var neighborhoodButton:UIButton!
     
     var yelpButton:UIButton!
+    var helpView:UIView!
     var helpButton:UIButton!
     var suggestionButton:UIButton!
     
@@ -336,21 +337,23 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func showButtons() {
         // CATEGORIES
         iNeedView = UIView()
-        iNeedView.frame = CGRectMake(0, 63, view.frame.width, (view.frame.height-165)/3)
+        iNeedView.frame = CGRectMake(0, 63, view.frame.width, (view.frame.height-63)/4)
         iNeedView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         backgroundView.addSubview(iNeedView)
         
         iNeedLabel = UILabel()
-        iNeedLabel.text = "I wanna..."
+        iNeedLabel.text = "I wanna"
         iNeedLabel.backgroundColor = UIColor.clearColor()
         iNeedLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iNeedLabel.textAlignment = NSTextAlignment.Center
-        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 80) / 3, 200, 40))
+//        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 80) / 3, 200, 40))
+        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 90)/2, 200, 40))
         iNeedLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         iNeedView.addSubview(iNeedLabel)
         
         categoryButton = UIButton()
-        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - (40 + (iNeedView.frame.height - 70) / 3), 290, 50)
+//        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - (40 + (iNeedView.frame.height - 70) / 3), 290, 50)
+        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - 50, 290, 50)
         categoryButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         categoryButton.setTitle("select category", forState: UIControlState.Normal)
         categoryButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
@@ -363,71 +366,76 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         // GENRES
         iFeelLikeView = UIView()
-        iFeelLikeView.frame = CGRectMake(0, 55 + iNeedView.frame.height, view.frame.width, (view.frame.height-165)/3)
+        iFeelLikeView.frame = CGRectMake(0, 63 + iNeedView.frame.height, view.frame.width, (view.frame.height-63)/4)
         iFeelLikeView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         backgroundView.addSubview(iFeelLikeView)
         
         iFeelLikeLabel = UILabel()
-        iFeelLikeLabel.text = "and feel like..."
+        iFeelLikeLabel.text = "and feel like"
         iFeelLikeLabel.backgroundColor = UIColor.clearColor()
         iFeelLikeLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iFeelLikeLabel.textAlignment = NSTextAlignment.Center
-        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 80) / 3, 300, 40))
+//        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 80) / 3, 300, 40))
+        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 90) / 2, 300, 40))
         iFeelLikeLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         iFeelLikeView.addSubview(iFeelLikeLabel)
         
         genreButton = UIButton()
-        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - (40 + (iFeelLikeView.frame.height - 70) / 3), 290, 50)
+//        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - (40 + (iFeelLikeView.frame.height - 70) / 3), 290, 50)
+        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - 50, 290, 50)
         genreButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         genreButton.setTitle("select type", forState: UIControlState.Normal)
         genreButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
         genreButton.setTitleColor(UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         genreButton.addTarget(self, action: "selectGenre:", forControlEvents: .TouchUpInside)
         genreButton.layer.borderWidth = 1;
-//        genreButton.layer.borderColor = UIColor.whiteColor().CGColor
         genreButton.layer.cornerRadius = 5.0
         iFeelLikeView.addSubview(genreButton)
         
         // NEIGHBORHOODS
         inView = UIView()
-        inView.frame = CGRectMake(0, 45 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-165)/3)
+        inView.frame = CGRectMake(0, 63 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-63)/4)
         inView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         backgroundView.addSubview(inView)
         
         inLabel = UILabel()
-        inLabel.text = "in..."
+        inLabel.text = "in"
         inLabel.backgroundColor = UIColor.clearColor()
         inLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         inLabel.textAlignment = NSTextAlignment.Center
-        inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 80) / 3, 120, 40))
+//        inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 80) / 3, 120, 40))
+        inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 90) / 2, 120, 40))
         inLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         inView.addSubview(inLabel)
         
         neighborhoodButton = UIButton()
-        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - (35 + (inView.frame.height - 70) / 3), 290, 50)
+//        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - (35 + (inView.frame.height - 70) / 3), 290, 50)
+        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - 50, 290, 50)
         neighborhoodButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         neighborhoodButton.setTitle("select neighborhood", forState: UIControlState.Normal)
         neighborhoodButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 28)
         neighborhoodButton.setTitleColor(UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         neighborhoodButton.addTarget(self, action: "selectNeighborhood:", forControlEvents: .TouchUpInside)
         neighborhoodButton.layer.borderWidth = 1;
-//        neighborhoodButton.layer.borderColor = UIColor.grayColor().CGColor
         neighborhoodButton.layer.cornerRadius = 5.0
         inView.addSubview(neighborhoodButton)
         
         // HELP
+        helpView = UIView()
+        helpView.frame = CGRectMake(0, view.frame.height - (view.frame.height-63)/4, view.frame.width, (view.frame.height-63)/4)
+        helpView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
+        backgroundView.addSubview(helpView)
         
         helpButton = UIButton()
-        helpButton.frame = CGRectMake((inView.frame.width-150)/2, backgroundView.frame.height - 95, 150, 60)
+        helpButton.frame = CGRectMake((helpView.frame.width-150)/2, (helpView.frame.height-60)/2, 150, 60)
         helpButton.backgroundColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0)
         helpButton.setTitle("help!", forState: UIControlState.Normal)
         helpButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 40)
         helpButton.addTarget(self, action: "helpClicked:", forControlEvents: .TouchUpInside)
         helpButton.layer.borderWidth = 1;
-//        helpButton.layer.borderColor = UIColor(red: 10.0/255.0, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0).CGColor
         helpButton.layer.borderColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0).CGColor
         helpButton.layer.cornerRadius = 5.0
-        backgroundView.addSubview(helpButton)
+        helpView.addSubview(helpButton)
     }
     
     func parseJsonData(data: NSData) -> [Description] {
