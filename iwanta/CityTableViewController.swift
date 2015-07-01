@@ -16,7 +16,6 @@ class CityTableViewController: UITableViewController {
         super.viewDidLoad()
         getCities()
         tableView.rowHeight = 150
-//        navigationItem.title = ""
     }
     
     func getCities() {
@@ -115,7 +114,7 @@ class CityTableViewController: UITableViewController {
                 let newCont = segue.destinationViewController as! FormViewController
                 println("HERE")
                 println(citiesArray[indexPath.row].id)
-                newCont.cityId = citiesArray[indexPath.row].id
+                newCont.city = citiesArray[indexPath.row]
 
             }
         }
