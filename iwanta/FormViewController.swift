@@ -12,6 +12,9 @@ import MessageUI
 class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate, MFMailComposeViewControllerDelegate {
     
     var city:City!
+    var chosenCategory:Description!
+    var chosenGenre:Description!
+    var chosenNeighborhood:Description!
     var backgroundView:UIView!
     var backgroundImageView: UIImageView!
     var categories: [Description]! = []
@@ -63,6 +66,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         super.viewDidLoad()
         
         navigationItem.title = city.name
+        
+        self.view.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 0.0)
         
         backgroundView = UIView()
         backgroundView.frame = CGRectMake(0, 0, super.view.frame.width, super.view.frame.height)
@@ -149,12 +154,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "select category")) {
             genres = drinkGenres
             categoryButton.setTitle("drink", forState: UIControlState.Normal)
+            chosenCategory = categories[0]
         } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "select type") && (categoryButton.titleLabel!.text == "drink")) {
             genreButton.setTitle("something good", forState: UIControlState.Normal)
+            chosenGenre = drinkGenres[0]
+            println(chosenGenre)
         }  else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "select type") && (categoryButton.titleLabel!.text == "eat")) {
             genreButton.setTitle("something yummy", forState: UIControlState.Normal)
+            chosenGenre = foodGenres[0]
+            println(chosenGenre)
         }else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "select neighborhood")) {
-            neighborhoodButton.setTitle("Doesn't Matter", forState: UIControlState.Normal)
+            neighborhoodButton.setTitle(neighborhoods[0].name, forState: UIControlState.Normal)
+            chosenNeighborhood = neighborhoods[0]
         }
         pickerBackgroundView.removeFromSuperview()
         defaults.setObject("", forKey: "buttonPressed")
@@ -206,6 +217,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         if buttonPressed == "category" {
             var category = categories[row].name
+            chosenCategory = categories[row]
             if category == "eat" {
                 genres = foodGenres
                 categoryButton.setTitle(category, forState: UIControlState.Normal)
@@ -215,8 +227,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             }
         } else if buttonPressed == "genre" {
             genreButton.setTitle(genres[row].name, forState: UIControlState.Normal)
+            chosenGenre = genres[row]
         } else if buttonPressed == "neighborhood" {
             neighborhoodButton.setTitle(neighborhoods[row].name, forState: UIControlState.Normal)
+            chosenNeighborhood = neighborhoods[row]
         }
         
     }
@@ -456,6 +470,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             let description = Description(
                 name: jsonProduct["name"] as! String
             )
+            description.id = jsonProduct["id"] as! Int
 
             descriptions.append(description)
         }
@@ -463,6 +478,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getMatch() {
+        println("in get match")
+        println(chosenGenre.id)
+        println(chosenNeighborhood.id)
         if let genre = genreButton.titleLabel?.text {
             if let neighborhood = neighborhoodButton.titleLabel?.text {
                 var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
@@ -470,7 +488,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
 //                var urlString = "http://localhost:3000/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
                 var urlString = "https://ineeda.herokuapp.com/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
 
-                println(urlString)
+//                println(urlString)
                 let request = NSURL(string: urlString)!
                 let urlSession = NSURLSession.sharedSession()
                 let task = urlSession.dataTaskWithURL(request){ (data, response, error) in
@@ -509,7 +527,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         } else {
             displayAlertMessage("Error", alertDescription: "Please select a type of activity.")
         }
-        println("AT END OF GET MATCH")
     }
     
     func displayAlertMessage(alertTitle:NSString, alertDescription:NSString) -> Void {
@@ -634,19 +651,14 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func showYelpView(sender: UIButton!) {
-        println(sender.tag)
-        println(matchResult.link)
-        
         self.performSegueWithIdentifier("showWebView", sender: self)
     }
     
     func showMapView(sender: UIButton!) {
-        println("MAP")
         self.performSegueWithIdentifier("showMapView", sender: self)
     }
     
     func showEmailView(sender: UIButton!) {
-        println("IN EMAIL VIEW")
         sendEmail(self)
     }
     
@@ -685,7 +697,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         let transitionOptions = UIViewAnimationOptions.TransitionFlipFromRight
         
         UIView.transitionFromView(views.frontView, toView: views.backView, duration: 0.5, options: transitionOptions, completion: nil)
-        println("IN ANIMATION")
     }
     
     func sendEmail (sender: AnyObject) {

@@ -15,7 +15,7 @@ class CityTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getCities()
-        tableView.rowHeight = 150
+        tableView.rowHeight = 200
     }
     
     func getCities() {
@@ -112,8 +112,6 @@ class CityTableViewController: UITableViewController {
         if (segue.identifier == "showSelectionView") {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let newCont = segue.destinationViewController as! FormViewController
-                println("HERE")
-                println(citiesArray[indexPath.row].id)
                 newCont.city = citiesArray[indexPath.row]
 
             }

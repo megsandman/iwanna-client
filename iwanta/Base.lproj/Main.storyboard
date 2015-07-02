@@ -16,7 +16,7 @@
                     <view key="view" contentMode="scaleToFill" id="ycG-pM-aGA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.1764705882352941" green="0.1764705882352941" blue="0.1764705882352941" alpha="0.0" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="aT7-Ue-Ls3">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="3Qt-du-N8u">
@@ -128,11 +128,9 @@
                                             <rect key="frame" x="-7" y="0.0" width="334" height="100"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaw-40-lDp">
-                                            <rect key="frame" x="60" y="36" width="200" height="28"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="U12-2E-0zs"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="26"/>
+                                            <rect key="frame" x="53" y="31" width="214" height="39"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="28"/>
                                             <color key="textColor" red="0.039215686274509803" green="0.83921568627450982" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
