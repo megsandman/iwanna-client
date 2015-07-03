@@ -137,6 +137,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         doneButton.frame = CGRectMake(self.view.frame.width - 80, 15, 65, 35)
         doneButton.backgroundColor = UIColor.blackColor()
         doneButton.setTitle("Select", forState: UIControlState.Normal)
+        doneButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 18)
         doneButton.addTarget(self, action: "dismissPickerView:", forControlEvents: .TouchUpInside)
         doneButton.layer.borderWidth = 1;
         doneButton.layer.borderColor = UIColor.whiteColor().CGColor
@@ -580,7 +581,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             goToLabel = UILabel()
             goToLabel.text = "Go to"
             goToLabel.backgroundColor = UIColor.clearColor()
-            goToLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
+            goToLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
             goToLabel.textAlignment = NSTextAlignment.Center
             goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 90, 200, 50))
             goToLabel.textColor = UIColor.whiteColor()
