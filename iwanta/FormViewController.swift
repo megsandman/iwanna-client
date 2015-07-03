@@ -120,6 +120,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func displayPickerView() {
+        println("PICKER VIEW HIT")
         pickerBackgroundView = UIView()
         pickerBackgroundView.frame = CGRectMake(0, self.view.frame.height - 250, self.view.frame.width, 250)
         pickerBackgroundView.backgroundColor = UIColor.blackColor()
@@ -173,16 +174,19 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             neighborhoodButton.setTitle(neighborhoods[0].name, forState: UIControlState.Normal)
             chosenNeighborhood = neighborhoods[0]
         }
+        
+        defaults.setObject("", forKey: "buttonPressed")
+        categoryButton.userInteractionEnabled = true
+        genreButton.userInteractionEnabled = true
+        neighborhoodButton.userInteractionEnabled = true
+        
         UIView.animateWithDuration(0.5, delay: 0.2, options: nil, animations: {
             self.pickerBackgroundView.center.y += self.view.bounds.height
             }, completion: {
             (value: Bool) in
             self.pickerBackgroundView.removeFromSuperview()
         })
-        defaults.setObject("", forKey: "buttonPressed")
-        categoryButton.userInteractionEnabled = true
-        genreButton.userInteractionEnabled = true
-        neighborhoodButton.userInteractionEnabled = true
+
     }
     
     //MARK: Data Sources
@@ -519,9 +523,13 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                             )
                             
                             var jsonAddress: String? = jsonResult["address"] as? String
-                            match.address = jsonAddress ?? "2070 Fell Street"
-                            match.city = "San Francisco"
-                            match.state = "CA"
+                            var jsonCity: String? = jsonResult["city"] as? String
+                            var jsonState: String? = jsonResult["state"] as? String
+                            var jsonZipCode: String? = jsonResult["zip_code"] as? String
+                            match.address = jsonAddress ?? ""
+                            match.city = jsonCity ?? ""
+                            match.state = jsonState ?? ""
+                            match.zipCode = jsonZipCode ?? ""
                             self.matchResult = match
                             self.displayResult(match)
                         }
