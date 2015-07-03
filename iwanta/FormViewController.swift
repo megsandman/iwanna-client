@@ -123,6 +123,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         pickerBackgroundView = UIView()
         pickerBackgroundView.frame = CGRectMake(0, self.view.frame.height - 250, self.view.frame.width, 250)
         pickerBackgroundView.backgroundColor = UIColor.blackColor()
+        pickerBackgroundView.center.y += self.view.bounds.height
         view.addSubview(pickerBackgroundView)
         
         categoryPicker = UIPickerView()
@@ -133,7 +134,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         pickerBackgroundView.addSubview(categoryPicker)
         
         doneButton = UIButton()
-        doneButton.frame = CGRectMake(self.view.frame.width - 70, 5, 65, 35)
+        doneButton.frame = CGRectMake(self.view.frame.width - 80, 15, 65, 35)
         doneButton.backgroundColor = UIColor.blackColor()
         doneButton.setTitle("Select", forState: UIControlState.Normal)
         doneButton.addTarget(self, action: "dismissPickerView:", forControlEvents: .TouchUpInside)
@@ -141,6 +142,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         doneButton.layer.borderColor = UIColor.whiteColor().CGColor
         doneButton.layer.cornerRadius = 5.0
         pickerBackgroundView.addSubview(doneButton)
+        
+        UIView.animateWithDuration(0.5, delay: 0.2, options: nil, animations: {
+            self.pickerBackgroundView.center.y -= self.view.bounds.height
+        }, completion: nil)
         
         categoryButton.userInteractionEnabled = false
         genreButton.userInteractionEnabled = false
@@ -167,7 +172,12 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             neighborhoodButton.setTitle(neighborhoods[0].name, forState: UIControlState.Normal)
             chosenNeighborhood = neighborhoods[0]
         }
-        pickerBackgroundView.removeFromSuperview()
+        UIView.animateWithDuration(0.5, delay: 0.2, options: nil, animations: {
+            self.pickerBackgroundView.center.y += self.view.bounds.height
+            }, completion: {
+            (value: Bool) in
+            self.pickerBackgroundView.removeFromSuperview()
+        })
         defaults.setObject("", forKey: "buttonPressed")
         categoryButton.userInteractionEnabled = true
         genreButton.userInteractionEnabled = true
