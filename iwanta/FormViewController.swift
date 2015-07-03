@@ -488,9 +488,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getMatch() {
-        println("in get match")
-        println(chosenGenre.id)
-        println(chosenNeighborhood.id)
         if let genre = genreButton.titleLabel?.text {
             if let neighborhood = neighborhoodButton.titleLabel?.text {
                 var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
@@ -565,7 +562,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultLabel.text = result.name
         resultLabel.backgroundColor = UIColor.clearColor()
         resultLabel.textAlignment = NSTextAlignment.Center
-        resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 150))
+//        resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 150))
         resultLabel.textColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0)
         resultLabel.numberOfLines = 0
         resultBackgroundView.addSubview(resultLabel)
@@ -585,7 +582,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             goToLabel.backgroundColor = UIColor.clearColor()
             goToLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
             goToLabel.textAlignment = NSTextAlignment.Center
-            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 70, 200, (resultBackgroundView.frame.height/3*2 - 50)/3-20))
+            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 90, 200, 50))
             goToLabel.textColor = UIColor.whiteColor()
             resultBackgroundView.addSubview(goToLabel)
          
@@ -626,7 +623,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             
             closeButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             
-            resultLabel.frame = CGRectIntegral(CGRectMake(20, goToLabel.frame.height, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, goToLabel.frame.height + 90, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
             resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 50)
             
         } else {
