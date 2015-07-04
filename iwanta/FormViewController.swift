@@ -623,11 +623,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             closeButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             
             resultLabel.frame = CGRectIntegral(CGRectMake(20, goToLabel.frame.height + 90, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
-            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 50)
+            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 35)
             
         } else {
             resultLabel.frame = CGRectIntegral(CGRectMake(20, 150, inView.frame.width - 40, 150))
-            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 30)
+            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 45)
             
             // ICONS
             contactIconImage = UIImageView(image: UIImage(named: "mail114"))
