@@ -20,7 +20,7 @@ class CityTableViewController: UITableViewController {
     
     func getCities() {
         //        var urlString = "http://localhost:3000/cities"
-        var urlString = "https://ineeda.herokuapp.com/cities"
+        var urlString = "https://i-wanna.herokuapp.com/cities"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()

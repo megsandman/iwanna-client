@@ -160,14 +160,14 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "select category")) {
             genres = drinkGenres
-            categoryButton.setTitle("drink", forState: UIControlState.Normal)
+            categoryButton.setTitle(categories[0].name, forState: UIControlState.Normal)
             chosenCategory = categories[0]
         } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "select type") && (categoryButton.titleLabel!.text == "drink")) {
-            genreButton.setTitle("something good", forState: UIControlState.Normal)
+            genreButton.setTitle(drinkGenres[0].name, forState: UIControlState.Normal)
             chosenGenre = drinkGenres[0]
             println(chosenGenre)
         }  else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "select type") && (categoryButton.titleLabel!.text == "eat")) {
-            genreButton.setTitle("something yummy", forState: UIControlState.Normal)
+            genreButton.setTitle(foodGenres[0].name, forState: UIControlState.Normal)
             chosenGenre = foodGenres[0]
             println(chosenGenre)
         }else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "select neighborhood")) {
@@ -175,15 +175,14 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             chosenNeighborhood = neighborhoods[0]
         }
         
-        defaults.setObject("", forKey: "buttonPressed")
-        categoryButton.userInteractionEnabled = true
-        genreButton.userInteractionEnabled = true
-        neighborhoodButton.userInteractionEnabled = true
-        
-        UIView.animateWithDuration(0.5, delay: 0.2, options: nil, animations: {
+        UIView.animateWithDuration(0.5, delay: 0.1, options: nil, animations: {
             self.pickerBackgroundView.center.y += self.view.bounds.height
             }, completion: {
             (value: Bool) in
+            defaults.setObject("", forKey: "buttonPressed")
+            self.categoryButton.userInteractionEnabled = true
+            self.genreButton.userInteractionEnabled = true
+            self.neighborhoodButton.userInteractionEnabled = true
             self.pickerBackgroundView.removeFromSuperview()
         })
 
@@ -280,7 +279,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     
     func getCategories() {
 //        var urlString = "http://localhost:3000/activities"
-        var urlString = "https://ineeda.herokuapp.com/activities"
+        var urlString = "https://i-wanna.herokuapp.com/activities"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -301,7 +300,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     
     func getNeighborhoods() {
 //        var urlString = "http://localhost:3000/cities/\(city.id)/neighborhoods"
-        var urlString = "https://ineeda.herokuapp.com/cities/\(city.id)/neighborhoods"
+        var urlString = "https://i-wanna.herokuapp.com/cities/\(city.id)/neighborhoods"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -322,8 +321,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getFood() {
-        //        var urlString = "http://localhost:3000/genres/2"
-        var urlString = "https://ineeda.herokuapp.com/genres/2"
+        //        var urlString = "http://localhost:3000/activities/2/genres"
+        var urlString = "https://i-wanna.herokuapp.com/activities/2/genres"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -343,8 +342,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getDrinks() {
-        //        var urlString = "http://localhost:3000/genres/1"
-        var urlString = "https://ineeda.herokuapp.com/genres/1"
+        //        var urlString = "http://localhost:3000/activities/1/genres"
+        var urlString = "https://i-wanna.herokuapp.com/activities/1/genres"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -493,12 +492,14 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getMatch() {
-        if let genre = genreButton.titleLabel?.text {
-            if let neighborhood = neighborhoodButton.titleLabel?.text {
-                var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-                var neighborhood2 = neighborhood.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-//                var urlString = "http://localhost:3000/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
-                var urlString = "https://ineeda.herokuapp.com/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
+//        if let genre = genreButton.titleLabel?.text {
+        if let genreId = chosenGenre?.id {
+//            if let neighborhood = neighborhoodButton.titleLabel?.text {
+            if let neighborhoodId = chosenNeighborhood?.id {
+//                var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+//                var neighborhood2 = neighborhood.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+                var urlString = "http://localhost:3000/matches/index?genre=\(genreId)&neighborhood=\(neighborhoodId)"
+//                var urlString = "https://i-wanna.herokuapp.com/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
 
 //                println(urlString)
                 let request = NSURL(string: urlString)!
@@ -589,7 +590,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             goToLabel = UILabel()
             goToLabel.text = "Go to"
             goToLabel.backgroundColor = UIColor.clearColor()
-            goToLabel.font = UIFont(name: "AvenirNext-Regular", size: 40)
+            goToLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
             goToLabel.textAlignment = NSTextAlignment.Center
             goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 90, 200, 50))
             goToLabel.textColor = UIColor.whiteColor()
