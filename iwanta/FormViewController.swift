@@ -67,12 +67,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         navigationItem.title = city.name
         
-        self.view.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 0.0)
-        
         backgroundView = UIView()
         backgroundView.frame = CGRectMake(0, 0, super.view.frame.width, super.view.frame.height)
-        backgroundView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 0.0)
-        backgroundView.contentMode = .ScaleAspectFill
+//        backgroundView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 0.0)
+        backgroundView.backgroundColor = UIColor.blackColor()
         backgroundView.userInteractionEnabled = true
         view.addSubview(backgroundView)
         

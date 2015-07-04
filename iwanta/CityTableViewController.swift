@@ -103,9 +103,8 @@ class CityTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-//        self.performSegueWithIdentifier("showSelectionView", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
