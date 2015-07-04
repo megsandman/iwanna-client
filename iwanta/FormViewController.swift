@@ -145,7 +145,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         doneButton.layer.cornerRadius = 5.0
         pickerBackgroundView.addSubview(doneButton)
         
-        UIView.animateWithDuration(0.5, delay: 0.2, options: nil, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.2, options: nil, animations: {
             self.pickerBackgroundView.center.y -= self.view.bounds.height
         }, completion: nil)
         
@@ -175,7 +175,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             chosenNeighborhood = neighborhoods[0]
         }
         
-        UIView.animateWithDuration(0.5, delay: 0.1, options: nil, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.2, options: nil, animations: {
             self.pickerBackgroundView.center.y += self.view.bounds.height
             }, completion: {
             (value: Bool) in
@@ -374,13 +374,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         iNeedLabel.backgroundColor = UIColor.clearColor()
         iNeedLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iNeedLabel.textAlignment = NSTextAlignment.Center
-//        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 80) / 3, 200, 40))
         iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 90)/2, 200, 40))
         iNeedLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         iNeedView.addSubview(iNeedLabel)
         
         categoryButton = UIButton()
-//        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - (40 + (iNeedView.frame.height - 70) / 3), 290, 50)
         categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - 50, 290, 50)
         categoryButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         categoryButton.setTitle("select category", forState: UIControlState.Normal)
@@ -388,7 +386,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         categoryButton.setTitleColor(UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         categoryButton.addTarget(self, action: "selectCategory:", forControlEvents: .TouchUpInside)
         categoryButton.layer.borderWidth = 1;
-//        categoryButton.layer.borderColor = UIColor.grayColor().CGColor
         categoryButton.layer.cornerRadius = 5.0
         iNeedView.addSubview(categoryButton)
         
@@ -403,13 +400,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         iFeelLikeLabel.backgroundColor = UIColor.clearColor()
         iFeelLikeLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iFeelLikeLabel.textAlignment = NSTextAlignment.Center
-//        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 80) / 3, 300, 40))
         iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 90) / 2, 300, 40))
         iFeelLikeLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         iFeelLikeView.addSubview(iFeelLikeLabel)
         
         genreButton = UIButton()
-//        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - (40 + (iFeelLikeView.frame.height - 70) / 3), 290, 50)
         genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - 50, 290, 50)
         genreButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         genreButton.setTitle("select type", forState: UIControlState.Normal)
@@ -431,13 +426,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         inLabel.backgroundColor = UIColor.clearColor()
         inLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         inLabel.textAlignment = NSTextAlignment.Center
-//        inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 80) / 3, 120, 40))
         inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 90) / 2, 120, 40))
         inLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         inView.addSubview(inLabel)
         
         neighborhoodButton = UIButton()
-//        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - (35 + (inView.frame.height - 70) / 3), 290, 50)
         neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - 50, 290, 50)
         neighborhoodButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         neighborhoodButton.setTitle("select neighborhood", forState: UIControlState.Normal)
@@ -498,10 +491,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             if let neighborhoodId = chosenNeighborhood?.id {
 //                var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
 //                var neighborhood2 = neighborhood.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-                var urlString = "http://localhost:3000/matches/index?genre=\(genreId)&neighborhood=\(neighborhoodId)"
-//                var urlString = "https://i-wanna.herokuapp.com/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
+//                var urlString = "http://localhost:3000/matches/index?genre=\(genreId)&neighborhood=\(neighborhoodId)"
+                var urlString = "https://i-wanna.herokuapp.com/matches/index?genre=\(genreId)&neighborhood=\(neighborhoodId)"
 
-//                println(urlString)
                 let request = NSURL(string: urlString)!
                 let urlSession = NSURLSession.sharedSession()
                 let task = urlSession.dataTaskWithURL(request){ (data, response, error) in
@@ -572,7 +564,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultLabel.text = result.name
         resultLabel.backgroundColor = UIColor.clearColor()
         resultLabel.textAlignment = NSTextAlignment.Center
-//        resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 150))
         resultLabel.textColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0)
         resultLabel.numberOfLines = 0
         resultBackgroundView.addSubview(resultLabel)
@@ -699,6 +690,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             subview.removeFromSuperview()
         }
 //        resultBackgroundView.removeFromSuperview()
+        chosenCategory = nil
+        chosenGenre = nil
+        chosenNeighborhood = nil
     }
     
     func animateViews() {
