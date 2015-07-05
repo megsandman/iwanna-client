@@ -11,11 +11,19 @@ import UIKit
 class CityTableViewController: UITableViewController {
     
     var citiesArray = [City]()
+    var spinner:UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        spinner.activityIndicatorViewStyle = .Gray
+        spinner.center = self.view.center
+        spinner.hidesWhenStopped = true
+        self.parentViewController?.view.addSubview(spinner)
+        spinner.startAnimating()
+        
         getCities()
-        tableView.rowHeight = 200
+        tableView.rowHeight = 201
     }
     
     func getCities() {
@@ -35,7 +43,9 @@ class CityTableViewController: UITableViewController {
             self.citiesArray = self.parseJsonData(data)
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
-
+                if self.spinner.isAnimating() {
+                    self.spinner.stopAnimating()
+                }
             })
         })
         task.resume()

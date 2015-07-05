@@ -626,8 +626,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 35)
             
         } else {
-            resultLabel.frame = CGRectIntegral(CGRectMake(20, 150, inView.frame.width - 40, 150))
-            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 45)
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, 100, inView.frame.width - 40, 250))
+            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
             
             // ICONS
             contactIconImage = UIImageView(image: UIImage(named: "mail114"))
