@@ -11,17 +11,24 @@ import UIKit
 class CityTableViewController: UITableViewController {
     
     var citiesArray = [City]()
+    var spinner:UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        spinner.activityIndicatorViewStyle = .Gray
+        spinner.center = self.view.center
+        spinner.hidesWhenStopped = true
+        self.parentViewController?.view.addSubview(spinner)
+        spinner.startAnimating()
+        
         getCities()
-        tableView.rowHeight = 150
-//        navigationItem.title = ""
+        tableView.rowHeight = 201
     }
     
     func getCities() {
         //        var urlString = "http://localhost:3000/cities"
-        var urlString = "https://ineeda.herokuapp.com/cities"
+        var urlString = "https://i-wanna.herokuapp.com/cities"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -36,7 +43,9 @@ class CityTableViewController: UITableViewController {
             self.citiesArray = self.parseJsonData(data)
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
-
+                if self.spinner.isAnimating() {
+                    self.spinner.stopAnimating()
+                }
             })
         })
         task.resume()
@@ -104,18 +113,15 @@ class CityTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-//        self.performSegueWithIdentifier("showSelectionView", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "showSelectionView") {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let newCont = segue.destinationViewController as! FormViewController
-                println("HERE")
-                println(citiesArray[indexPath.row].id)
-                newCont.cityId = citiesArray[indexPath.row].id
+                newCont.city = citiesArray[indexPath.row]
 
             }
         }

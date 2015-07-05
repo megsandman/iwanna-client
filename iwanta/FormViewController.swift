@@ -11,7 +11,10 @@ import MessageUI
 
 class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate, MFMailComposeViewControllerDelegate {
     
-    var cityId:Int!
+    var city:City!
+    var chosenCategory:Description!
+    var chosenGenre:Description!
+    var chosenNeighborhood:Description!
     var backgroundView:UIView!
     var backgroundImageView: UIImageView!
     var categories: [Description]! = []
@@ -38,6 +41,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     var neighborhoodButton:UIButton!
     
     var yelpButton:UIButton!
+    var helpView:UIView!
     var helpButton:UIButton!
     var suggestionButton:UIButton!
     
@@ -61,22 +65,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = city.name
+        
         backgroundView = UIView()
-        backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
-//        backgroundView.backgroundColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 0.0)
-        backgroundView.backgroundColor = UIColor.whiteColor()
-        backgroundView.contentMode = .ScaleAspectFill
+        backgroundView.frame = CGRectMake(0, 0, super.view.frame.width, super.view.frame.height)
+//        backgroundView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 0.0)
+        backgroundView.backgroundColor = UIColor.blackColor()
         backgroundView.userInteractionEnabled = true
         view.addSubview(backgroundView)
         
-        backgroundImageView = UIImageView()
-        backgroundImageView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
-        backgroundImageView.image = UIImage(named:"grey_background")
-//        backgroundView.addSubview(backgroundImageView)
-        
         resultBackgroundView = UIView()
         resultBackgroundView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        resultBackgroundView.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        resultBackgroundView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         
         getCategories()
         getNeighborhoods()
@@ -118,9 +118,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func displayPickerView() {
+        println("PICKER VIEW HIT")
         pickerBackgroundView = UIView()
         pickerBackgroundView.frame = CGRectMake(0, self.view.frame.height - 250, self.view.frame.width, 250)
         pickerBackgroundView.backgroundColor = UIColor.blackColor()
+        pickerBackgroundView.center.y += self.view.bounds.height
         view.addSubview(pickerBackgroundView)
         
         categoryPicker = UIPickerView()
@@ -131,14 +133,19 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         pickerBackgroundView.addSubview(categoryPicker)
         
         doneButton = UIButton()
-        doneButton.frame = CGRectMake(self.view.frame.width - 70, 5, 65, 35)
+        doneButton.frame = CGRectMake(self.view.frame.width - 80, 15, 65, 35)
         doneButton.backgroundColor = UIColor.blackColor()
         doneButton.setTitle("Select", forState: UIControlState.Normal)
+        doneButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 18)
         doneButton.addTarget(self, action: "dismissPickerView:", forControlEvents: .TouchUpInside)
         doneButton.layer.borderWidth = 1;
         doneButton.layer.borderColor = UIColor.whiteColor().CGColor
         doneButton.layer.cornerRadius = 5.0
         pickerBackgroundView.addSubview(doneButton)
+        
+        UIView.animateWithDuration(0.2, delay: 0.2, options: nil, animations: {
+            self.pickerBackgroundView.center.y -= self.view.bounds.height
+        }, completion: nil)
         
         categoryButton.userInteractionEnabled = false
         genreButton.userInteractionEnabled = false
@@ -151,19 +158,32 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         if ((defaultValue == "category") && (categoryButton.titleLabel!.text == "select category")) {
             genres = drinkGenres
-            categoryButton.setTitle("drink", forState: UIControlState.Normal)
+            categoryButton.setTitle(categories[0].name, forState: UIControlState.Normal)
+            chosenCategory = categories[0]
         } else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "select type") && (categoryButton.titleLabel!.text == "drink")) {
-            genreButton.setTitle("something good", forState: UIControlState.Normal)
+            genreButton.setTitle(drinkGenres[0].name, forState: UIControlState.Normal)
+            chosenGenre = drinkGenres[0]
+            println(chosenGenre)
         }  else if ((defaultValue == "genre") && (genreButton.titleLabel!.text == "select type") && (categoryButton.titleLabel!.text == "eat")) {
-            genreButton.setTitle("something yummy", forState: UIControlState.Normal)
+            genreButton.setTitle(foodGenres[0].name, forState: UIControlState.Normal)
+            chosenGenre = foodGenres[0]
+            println(chosenGenre)
         }else if ((defaultValue == "neighborhood") && (neighborhoodButton.titleLabel!.text == "select neighborhood")) {
-            neighborhoodButton.setTitle("Doesn't Matter", forState: UIControlState.Normal)
+            neighborhoodButton.setTitle(neighborhoods[0].name, forState: UIControlState.Normal)
+            chosenNeighborhood = neighborhoods[0]
         }
-        pickerBackgroundView.removeFromSuperview()
-        defaults.setObject("", forKey: "buttonPressed")
-        categoryButton.userInteractionEnabled = true
-        genreButton.userInteractionEnabled = true
-        neighborhoodButton.userInteractionEnabled = true
+        
+        UIView.animateWithDuration(0.2, delay: 0.2, options: nil, animations: {
+            self.pickerBackgroundView.center.y += self.view.bounds.height
+            }, completion: {
+            (value: Bool) in
+            defaults.setObject("", forKey: "buttonPressed")
+            self.categoryButton.userInteractionEnabled = true
+            self.genreButton.userInteractionEnabled = true
+            self.neighborhoodButton.userInteractionEnabled = true
+            self.pickerBackgroundView.removeFromSuperview()
+        })
+
     }
     
     //MARK: Data Sources
@@ -209,6 +229,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         
         if buttonPressed == "category" {
             var category = categories[row].name
+            chosenCategory = categories[row]
             if category == "eat" {
                 genres = foodGenres
                 categoryButton.setTitle(category, forState: UIControlState.Normal)
@@ -218,8 +239,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             }
         } else if buttonPressed == "genre" {
             genreButton.setTitle(genres[row].name, forState: UIControlState.Normal)
+            chosenGenre = genres[row]
         } else if buttonPressed == "neighborhood" {
             neighborhoodButton.setTitle(neighborhoods[row].name, forState: UIControlState.Normal)
+            chosenNeighborhood = neighborhoods[row]
         }
         
     }
@@ -254,7 +277,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     
     func getCategories() {
 //        var urlString = "http://localhost:3000/activities"
-        var urlString = "https://ineeda.herokuapp.com/activities"
+        var urlString = "https://i-wanna.herokuapp.com/activities"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -274,8 +297,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getNeighborhoods() {
-//        var urlString = "http://localhost:3000/cities/\(cityId)/neighborhoods"
-        var urlString = "https://ineeda.herokuapp.com/cities/\(cityId)/neighborhoods"
+//        var urlString = "http://localhost:3000/cities/\(city.id)/neighborhoods"
+        var urlString = "https://i-wanna.herokuapp.com/cities/\(city.id)/neighborhoods"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -296,8 +319,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getFood() {
-        //        var urlString = "http://localhost:3000/genres/2"
-        var urlString = "https://ineeda.herokuapp.com/genres/2"
+        //        var urlString = "http://localhost:3000/activities/2/genres"
+        var urlString = "https://i-wanna.herokuapp.com/activities/2/genres"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -317,8 +340,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getDrinks() {
-        //        var urlString = "http://localhost:3000/genres/1"
-        var urlString = "https://ineeda.herokuapp.com/genres/1"
+        //        var urlString = "http://localhost:3000/activities/1/genres"
+        var urlString = "https://i-wanna.herokuapp.com/activities/1/genres"
         
         let request = NSURLRequest(URL: NSURL(string: urlString)!)
         let urlSession = NSURLSession.sharedSession()
@@ -340,98 +363,98 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     func showButtons() {
         // CATEGORIES
         iNeedView = UIView()
-        iNeedView.frame = CGRectMake(0, 50, view.frame.width, (view.frame.height-165)/3)
-        iNeedView.backgroundColor = UIColor.clearColor()
+        iNeedView.frame = CGRectMake(0, 63, view.frame.width, (view.frame.height-63)/4)
+        iNeedView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         backgroundView.addSubview(iNeedView)
         
         iNeedLabel = UILabel()
-        iNeedLabel.text = "I wanna..."
+        iNeedLabel.text = "I wanna"
         iNeedLabel.backgroundColor = UIColor.clearColor()
         iNeedLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iNeedLabel.textAlignment = NSTextAlignment.Center
-        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 80) / 3, 200, 40))
-        iNeedLabel.textColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+        iNeedLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, (iNeedView.frame.height - 90)/2, 200, 40))
+        iNeedLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         iNeedView.addSubview(iNeedLabel)
         
         categoryButton = UIButton()
-        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - (40 + (iNeedView.frame.height - 70) / 3), 290, 50)
-        categoryButton.backgroundColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+        categoryButton.frame = CGRectMake((iNeedView.frame.width-290)/2, iNeedView.frame.height - 50, 290, 50)
+        categoryButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         categoryButton.setTitle("select category", forState: UIControlState.Normal)
         categoryButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
-        categoryButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        categoryButton.setTitleColor(UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         categoryButton.addTarget(self, action: "selectCategory:", forControlEvents: .TouchUpInside)
         categoryButton.layer.borderWidth = 1;
-        categoryButton.layer.borderColor = UIColor.grayColor().CGColor
         categoryButton.layer.cornerRadius = 5.0
         iNeedView.addSubview(categoryButton)
         
         // GENRES
         iFeelLikeView = UIView()
-        iFeelLikeView.frame = CGRectMake(0, 55 + iNeedView.frame.height, view.frame.width, (view.frame.height-165)/3)
-        iFeelLikeView.backgroundColor = UIColor.clearColor()
+        iFeelLikeView.frame = CGRectMake(0, 63 + iNeedView.frame.height, view.frame.width, (view.frame.height-63)/4)
+        iFeelLikeView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         backgroundView.addSubview(iFeelLikeView)
         
         iFeelLikeLabel = UILabel()
-        iFeelLikeLabel.text = "and feel like..."
+        iFeelLikeLabel.text = "and feel like"
         iFeelLikeLabel.backgroundColor = UIColor.clearColor()
         iFeelLikeLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         iFeelLikeLabel.textAlignment = NSTextAlignment.Center
-        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 80) / 3, 300, 40))
-        iFeelLikeLabel.textColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+        iFeelLikeLabel.frame = CGRectIntegral(CGRectMake((iFeelLikeView.frame.width-300)/2, (iFeelLikeView.frame.height - 90) / 2, 300, 40))
+        iFeelLikeLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         iFeelLikeView.addSubview(iFeelLikeLabel)
         
         genreButton = UIButton()
-        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - (40 + (iFeelLikeView.frame.height - 70) / 3), 290, 50)
-        genreButton.backgroundColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+        genreButton.frame = CGRectMake((iFeelLikeView.frame.width-290)/2, iFeelLikeView.frame.height - 50, 290, 50)
+        genreButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         genreButton.setTitle("select type", forState: UIControlState.Normal)
         genreButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 30)
-        genreButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        genreButton.setTitleColor(UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         genreButton.addTarget(self, action: "selectGenre:", forControlEvents: .TouchUpInside)
         genreButton.layer.borderWidth = 1;
-        genreButton.layer.borderColor = UIColor.whiteColor().CGColor
         genreButton.layer.cornerRadius = 5.0
         iFeelLikeView.addSubview(genreButton)
         
         // NEIGHBORHOODS
         inView = UIView()
-        inView.frame = CGRectMake(0, 45 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-165)/3)
-        inView.backgroundColor = UIColor.clearColor()
+        inView.frame = CGRectMake(0, 63 + iNeedView.frame.height + iFeelLikeView.frame.height, view.frame.width, (view.frame.height-63)/4)
+        inView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
         backgroundView.addSubview(inView)
         
         inLabel = UILabel()
-        inLabel.text = "in..."
+        inLabel.text = "in"
         inLabel.backgroundColor = UIColor.clearColor()
         inLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
         inLabel.textAlignment = NSTextAlignment.Center
-        inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 80) / 3, 120, 40))
-        inLabel.textColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+        inLabel.frame = CGRectIntegral(CGRectMake((inView.frame.width-120)/2, (inView.frame.height - 90) / 2, 120, 40))
+        inLabel.textColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         inView.addSubview(inLabel)
         
         neighborhoodButton = UIButton()
-        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - (35 + (inView.frame.height - 70) / 3), 290, 50)
-        neighborhoodButton.backgroundColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+        neighborhoodButton.frame = CGRectMake((inView.frame.width-290)/2, inView.frame.height - 50, 290, 50)
+        neighborhoodButton.backgroundColor = UIColor(red: 251.0/255.0, green: 251.0/255.0, blue: 251.0/255.0, alpha: 1.0)
         neighborhoodButton.setTitle("select neighborhood", forState: UIControlState.Normal)
         neighborhoodButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 28)
-        neighborhoodButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        neighborhoodButton.setTitleColor(UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
         neighborhoodButton.addTarget(self, action: "selectNeighborhood:", forControlEvents: .TouchUpInside)
         neighborhoodButton.layer.borderWidth = 1;
-        neighborhoodButton.layer.borderColor = UIColor.grayColor().CGColor
         neighborhoodButton.layer.cornerRadius = 5.0
         inView.addSubview(neighborhoodButton)
         
         // HELP
+        helpView = UIView()
+        helpView.frame = CGRectMake(0, view.frame.height - (view.frame.height-63)/4, view.frame.width, (view.frame.height-63)/4)
+        helpView.backgroundColor = UIColor(red: 45.0/255.0, green: 45.0/255.0, blue: 45.0/255.0, alpha: 1.0)
+        backgroundView.addSubview(helpView)
         
         helpButton = UIButton()
-        helpButton.frame = CGRectMake((inView.frame.width-150)/2, backgroundView.frame.height - 95, 150, 60)
+        helpButton.frame = CGRectMake((helpView.frame.width-150)/2, (helpView.frame.height-60)/2, 150, 60)
         helpButton.backgroundColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0)
         helpButton.setTitle("help!", forState: UIControlState.Normal)
         helpButton.titleLabel!.font =  UIFont(name: "AvenirNext-UltraLight", size: 40)
         helpButton.addTarget(self, action: "helpClicked:", forControlEvents: .TouchUpInside)
         helpButton.layer.borderWidth = 1;
-//        helpButton.layer.borderColor = UIColor(red: 10.0/255.0, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0).CGColor
         helpButton.layer.borderColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0).CGColor
         helpButton.layer.cornerRadius = 5.0
-        backgroundView.addSubview(helpButton)
+        helpView.addSubview(helpButton)
     }
     
     func parseJsonData(data: NSData) -> [Description] {
@@ -452,6 +475,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             let description = Description(
                 name: jsonProduct["name"] as! String
             )
+            description.id = jsonProduct["id"] as! Int
 
             descriptions.append(description)
         }
@@ -459,14 +483,15 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func getMatch() {
-        if let genre = genreButton.titleLabel?.text {
-            if let neighborhood = neighborhoodButton.titleLabel?.text {
-                var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-                var neighborhood2 = neighborhood.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-//                var urlString = "http://localhost:3000/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
-                var urlString = "https://ineeda.herokuapp.com/matches/find?genre=\(genre2)&neighborhood=\(neighborhood2)"
+//        if let genre = genreButton.titleLabel?.text {
+        if let genreId = chosenGenre?.id {
+//            if let neighborhood = neighborhoodButton.titleLabel?.text {
+            if let neighborhoodId = chosenNeighborhood?.id {
+//                var genre2 = genre.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+//                var neighborhood2 = neighborhood.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+//                var urlString = "http://localhost:3000/matches/index?genre=\(genreId)&neighborhood=\(neighborhoodId)"
+                var urlString = "https://i-wanna.herokuapp.com/matches/index?genre=\(genreId)&neighborhood=\(neighborhoodId)"
 
-                println(urlString)
                 let request = NSURL(string: urlString)!
                 let urlSession = NSURLSession.sharedSession()
                 let task = urlSession.dataTaskWithURL(request){ (data, response, error) in
@@ -489,9 +514,13 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
                             )
                             
                             var jsonAddress: String? = jsonResult["address"] as? String
-                            match.address = jsonAddress ?? "2070 Fell Street"
-                            match.city = "San Francisco"
-                            match.state = "CA"
+                            var jsonCity: String? = jsonResult["city"] as? String
+                            var jsonState: String? = jsonResult["state"] as? String
+                            var jsonZipCode: String? = jsonResult["zip_code"] as? String
+                            match.address = jsonAddress ?? ""
+                            match.city = jsonCity ?? ""
+                            match.state = jsonState ?? ""
+                            match.zipCode = jsonZipCode ?? ""
                             self.matchResult = match
                             self.displayResult(match)
                         }
@@ -505,7 +534,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         } else {
             displayAlertMessage("Error", alertDescription: "Please select a type of activity.")
         }
-        println("AT END OF GET MATCH")
     }
     
     func displayAlertMessage(alertTitle:NSString, alertDescription:NSString) -> Void {
@@ -534,7 +562,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         resultLabel.text = result.name
         resultLabel.backgroundColor = UIColor.clearColor()
         resultLabel.textAlignment = NSTextAlignment.Center
-        resultLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-280)/2, 220, 280, 150))
         resultLabel.textColor = UIColor(red: 93.0/255.0, green: 204.0/255.0, blue: 175.0/255.0, alpha: 1.0)
         resultLabel.numberOfLines = 0
         resultBackgroundView.addSubview(resultLabel)
@@ -554,7 +581,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             goToLabel.backgroundColor = UIColor.clearColor()
             goToLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
             goToLabel.textAlignment = NSTextAlignment.Center
-            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 70, 200, (resultBackgroundView.frame.height/3*2 - 50)/3-20))
+            goToLabel.frame = CGRectIntegral(CGRectMake((iNeedView.frame.width-200)/2, 90, 200, 50))
             goToLabel.textColor = UIColor.whiteColor()
             resultBackgroundView.addSubview(goToLabel)
          
@@ -595,12 +622,12 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             
             closeButton.frame = CGRectMake(55, resultBackgroundView.frame.height - resultBackgroundView.frame.height/9, inView.frame.width - 40, resultBackgroundView.frame.height/9)
             
-            resultLabel.frame = CGRectIntegral(CGRectMake(20, goToLabel.frame.height, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
-            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 50)
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, goToLabel.frame.height + 90, inView.frame.width - 40, (resultBackgroundView.frame.height/3*2 - 50)/3*2))
+            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 35)
             
         } else {
-            resultLabel.frame = CGRectIntegral(CGRectMake(20, 150, inView.frame.width - 40, 150))
-            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 30)
+            resultLabel.frame = CGRectIntegral(CGRectMake(20, 100, inView.frame.width - 40, 250))
+            resultLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 40)
             
             // ICONS
             contactIconImage = UIImageView(image: UIImage(named: "mail114"))
@@ -630,19 +657,14 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     }
     
     func showYelpView(sender: UIButton!) {
-        println(sender.tag)
-        println(matchResult.link)
-        
         self.performSegueWithIdentifier("showWebView", sender: self)
     }
     
     func showMapView(sender: UIButton!) {
-        println("MAP")
         self.performSegueWithIdentifier("showMapView", sender: self)
     }
     
     func showEmailView(sender: UIButton!) {
-        println("IN EMAIL VIEW")
         sendEmail(self)
     }
     
@@ -666,6 +688,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             subview.removeFromSuperview()
         }
 //        resultBackgroundView.removeFromSuperview()
+        chosenCategory = nil
+        chosenGenre = nil
+        chosenNeighborhood = nil
     }
     
     func animateViews() {
@@ -681,7 +706,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         let transitionOptions = UIViewAnimationOptions.TransitionFlipFromRight
         
         UIView.transitionFromView(views.frontView, toView: views.backView, duration: 0.5, options: transitionOptions, completion: nil)
-        println("IN ANIMATION")
     }
     
     func sendEmail (sender: AnyObject) {
